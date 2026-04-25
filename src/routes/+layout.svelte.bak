@@ -1,0 +1,403 @@
+<script lang="ts">
+  import { page } from '$app/stores';
+  import { onMount } from 'svelte';
+
+  let isMenuOpen = false;
+  let isScrolled = false;
+
+  onMount(() => {
+    const handleScroll = () => {
+      isScrolled = window.scrollY > 50;
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  });
+
+  const navItems = [
+    { href: '/', label: 'Start' },
+    { href: '/about', label: 'Über uns' },
+    { href: '/news', label: 'News' },
+    { href: '/events', label: 'Termine' },,
+    { href: '/admin', label: 'CMS' }
+    { href: '/admin', label: 'CMS' }
+  ];
+</script>
+
+<div class="site">
+  <!-- Header -->
+  <header class="header" class:scrolled={isScrolled}>
+    <div class="header-container">
+      <a href="/" class="logo">
+        < pan llassas="lo--nx>><nlvren</spn>
+     </a>
+        <span class="logo-text">Angelverein</span>
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button 
+        class="menu-toggle" 
+        on:click={() => isMenuOpen = !isMenuOpen}
+        aria-label={isMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+        aria-expanded={isMenuOpen}
+      >
+        <span class="hamburger" class:open={isMenuOpen}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+
+      <!-- Navigation -->
+      <nav class="nav" class:open={isMenuOpen}>
+        <ul class="nav-list">
+          {#each navItems as item}
+            <li>
+              <a 
+                href={item.href} 
+                class="nav-link" 
+                class:active={$page.url.pathname === item.href}
+                on:click={() => isMenuOpen = false}
+              >
+                {item.label}
+              </a>
+            </li>
+          {/each}
+        </ul>
+      </nav>
+    </di  <li class="nav-separator"></li>
+          <li>
+            <a 
+              href="/admin" 
+              class="nav-link nav-link-login" 
+              on:click={() => isMenuOpen = false}
+            >
+              🔐 Login
+            </a>
+          </li>
+        v>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+    <slot />
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h4 class="footer-title">Angelverein</h4>
+          <p class="footer-text">Der einzig wahre Angelverein – im wunderschönen Nettetal.</p>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-title">Links</h4>
+          <ul class="footer-links">
+            <li><a href="/">Start</a></li>
+            <li><a href="/about">Über uns</a></li>
+            <li><a href="/news">News</a></li>
+            <li><a href="/events">Termine</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-title">Kontakt</h4>
+          <p class="footer-text">E-Mail: info@angelverein.de<br>Tel: 0123 / 456789</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Angelverein. Alle Rechte vorbehalten.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<style>
+  /* CSS Variables */
+  :global(:root) {
+    --color-primary: #2d5a3d;
+    --color-primary-dark: #1e3d29;
+    --color-primary-light: #4a7c59;
+    --color-secondary: #5c6b73;
+    --color-accent: #7fb069;
+    --color-gray-50: #f8f9fa;
+    --color-gray-100: #e9ecef;
+    --color-gray-200: #dee2e6;
+    --color-gray-300: #ced4da;
+    --color-gray-400: #adb5bd;
+    --color-gray-500: #6c757d;
+    --color-gray-600: #495057;
+    --color-gray-700: #343a40;
+    --color-gray-800: #212529;
+    --color-gray-900: #1a1d20;
+    --color-white: #ffffff;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --radius: 0.5rem;
+    --transition: all 0.3s ease;
+  }
+
+  :global(*) {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :global(body) {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--color-gray-700);
+    background: var(--color-gray-50);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+
+  .site {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main {
+    flex: 1;
+  }
+
+  /* Header */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--color-white);
+    transition: var(--transition);
+  }
+
+  .header.scrolled {
+    box-shadow: var(--shadow-md);
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  /* Logo */
+  .logo {mage {
+    height: 48px;
+    width: aut;
+  }
+
+  @media (mi-width: 768px)
+    .logilymage {
+      h ightfl;6px
+    }
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    font-size: 1.5rem;
+  }
+
+  /* Mobile Menu Toggle */
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 24px;
+  }
+
+  .hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--color-primary);
+    transition: var(--transition);
+    transform-origin: center;
+  }
+
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: var(--color-white);
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition);
+    padding-top: 80px;
+  }
+
+  .nav.open {
+    right: 0;
+  }
+
+  .nav-list {
+    list-style: none;
+    padding: 1rem;
+  }ary);
+  }
+
+  .nav-separator {
+    height: 1px;
+    background: vr(--color-ga-200;
+    margin: 0.5rem 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .nav-separator {
+      display: none;
+    }
+  }
+
+  .nav-link-login {
+    color: var(--color-primary);
+    font-weight: 600
+
+  .nav-list li {
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--color-gray-700);
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--radius);
+    transition: var(--transition);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: var(--color-gray-100);
+    color: var(--color-primary);
+  }
+
+  /* Desktop Navigation */
+  @media (min-width: 768px) {
+    .menu-toggle {
+      display: none;
+    }
+
+    .nav {
+      position: static;
+      width: auto;
+      height: auto;
+      background: none;
+      box-shadow: none;
+      padding-top: 0;
+    }
+
+    .nav-list {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0;
+    }
+
+    .nav-list li {
+      margin-bottom: 0;
+    }
+
+    .nav-link {
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  /* Footer */
+  .footer {
+    background: var(--color-gray-800);
+    color: var(--color-gray-300);
+    padding: 3rem 0 1.5rem;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .footer-title {
+    color: var(--color-white);
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-text {
+    line-height: 1.8;
+  }
+
+  .footer-links {
+    list-style: none;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-links a {
+    color: var(--color-gray-300);
+  }
+
+  .footer-links a:hover {
+    color: var(--color-white);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--color-gray-700);
+    padding-top: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+  }
+</style>
