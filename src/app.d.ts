@@ -1,7 +1,5 @@
 declare global {
-	interface Window {
-		CMS: any;
-	}
+	namespace App {}
 }
 
 export {};

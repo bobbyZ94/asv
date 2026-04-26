@@ -1,0 +1,11 @@
+{
+  "section_label": "Schonzeiten",
+  "title": "Schonzeiten beachten",
+  "intro": "Zum Schutz unserer Fischbestände müssen folgende Schonzeiten beachtet werden:",
+  "fish": [
+    { "species": "Karpfen", "season": "01.04. - 31.05.", "min_size": "35 cm" },
+    { "species": "Hecht", "season": "01.02. - 31.03.", "min_size": "50 cm" },
+    { "species": "Zander", "season": "01.02. - 31.03.", "min_size": "45 cm" },
+    { "species": "Barsch", "season": "01.04. - 31.05.", "min_size": "20 cm" }
+  ]
+}

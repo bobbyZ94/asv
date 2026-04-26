@@ -1,0 +1,11 @@
+{
+  "section_label": "Über uns",
+  "title": "Verein(t) seit 1950",
+  "paragraph1": "Der Angelverein wurde 1950 gegründet und hat seitdem über 150 Mitglieder. Wir pflegen mehrere Gewässer in der Region und engagieren uns für den Naturschutz und nachhaltiges Angeln.",
+  "paragraph2": "Seit dem 26.08.1950 vereint der Angelverein nun bereits seine Mitglieder, die durch die Leidenschaft zum Angeln verbunden sind – damals wie heute. In 2025 dürfen wir ein besonderes Fest feiern: unser 75-jähriges Vereinsjubiläum.",
+  "stats": [
+    { "number": "150+", "label": "Mitglieder" },
+    { "number": "75", "label": "Jahre" },
+    { "number": "2", "label": "Gewässer" }
+  ]
+}

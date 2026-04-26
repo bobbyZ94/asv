@@ -1,0 +1,37 @@
+{
+  "section_label": "Mitgliedschaft",
+  "title": "Mitglied werden",
+  "intro": "Werden Sie Teil unseres Angelvereins und genießen Sie Zugang zu unseren Gewässern, regelmäßige Vereinsaktivitäten und eine starke Gemeinschaft.",
+  "plans": [
+    {
+      "title": "Erwachsene",
+      "price": "€80/Jahr",
+      "featured": false,
+      "features": [
+        "Zugang zu allen Gewässern",
+        "Teilnahme an Veranstaltungen",
+        "Stimmrecht in der Mitgliederversammlung"
+      ]
+    },
+    {
+      "title": "Familie",
+      "price": "€120/Jahr",
+      "featured": true,
+      "features": [
+        "Zugang für 2 Erwachsene + Kinder",
+        "Teilnahme an Veranstaltungen",
+        "Jugendförderung"
+      ]
+    },
+    {
+      "title": "Jugend",
+      "price": "€25/Jahr",
+      "featured": false,
+      "features": [
+        "Bis 18 Jahre",
+        "Zugang zu allen Gewässern",
+        "Jugendaktivitäten"
+      ]
+    }
+  ]
+}
