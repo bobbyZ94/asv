@@ -42,6 +42,9 @@ const HTML = `<!DOCTYPE html>
         },
         media_folder: 'static/uploads',
         public_folder: '/uploads',
+        media_library: {
+          max_file_size: 10485760
+        },
         collections: [
           {
             name: 'start',
@@ -74,6 +77,7 @@ const HTML = `<!DOCTYPE html>
                 markdown('Text', 'body'),
                 {
                   label: 'Statistik-Karten',
+                  label_singular: 'Statistik-Karte',
                   name: 'stats',
                   widget: 'list',
                   collapsed: true,
@@ -100,6 +104,7 @@ const HTML = `<!DOCTYPE html>
                 { label: 'Titel', name: 'title', widget: 'string' },
                 {
                   label: 'Veranstaltungen',
+                  label_singular: 'Veranstaltung',
                   name: 'events',
                   widget: 'list',
                   collapsed: true,
@@ -111,8 +116,8 @@ const HTML = `<!DOCTYPE html>
                       widget: 'datetime',
                       date_format: 'dd.MM.yyyy',
                       time_format: false,
-                      format: 'dd-MM-yyyy',
-                      picker_utc: false,
+                      format: 'dd.MM.yyyy',
+                      picker_utc: false
                     },
                     { label: 'Typ', name: 'type', widget: 'select', options: ['Arbeitsdienst', 'Jugend', 'Versammlung', 'Fest', 'Sonstiges'] },
                     { label: 'Titel', name: 'title', widget: 'string' },
@@ -139,6 +144,7 @@ const HTML = `<!DOCTYPE html>
                 markdown('Einführungstext', 'intro'),
                 {
                   label: 'Fischarten',
+                  label_singular: 'Fischart',
                   name: 'fish',
                   widget: 'list',
                   collapsed: true,
@@ -167,14 +173,14 @@ const HTML = `<!DOCTYPE html>
                 markdown('Einführungstext', 'intro'),
                 {
                   label: 'Mitgliedschafts-Optionen',
+                  label_singular: 'Mitgliedschafts-Option',
                   name: 'plans',
                   widget: 'list',
                   collapsed: true,
                   summary: '{{fields.title}} - {{fields.price}}',
                   fields: [
                     { label: 'Titel', name: 'title', widget: 'string' },
-                    { label: 'Preis', name: 'price', widget: 'string', hint: 'z.B. €80/Jahr' },
-                    { label: 'Hervorgehoben', name: 'featured', widget: 'boolean', default: false, required: false },
+                    { label: 'Preis', name: 'price', widget: 'string' },
                     {
                       label: 'Vorteile',
                       name: 'features',
@@ -216,15 +222,24 @@ const HTML = `<!DOCTYPE html>
               fields: [
                 { label: 'Bereichsbezeichnung', name: 'section_label', widget: 'string' },
                 { label: 'Titel', name: 'title', widget: 'string' },
-                markdown('Einführungstext', 'intro', false),
                 {
                   label: 'Bilder',
+                  label_singular: 'Bild',
                   name: 'images',
                   widget: 'list',
                   collapsed: true,
-                  summary: '{{fields.caption}}',
+                  summary: '{{fields.date}} - {{fields.caption}}',
                   fields: [
                     { label: 'Bild', name: 'image', widget: 'image' },
+                    {
+                      label: 'Datum',
+                      name: 'date',
+                      widget: 'datetime',
+                      date_format: 'dd.MM.yyyy',
+                      time_format: false,
+                      format: 'dd.MM.yyyy',
+                      picker_utc: false
+                    },
                     { label: 'Beschriftung', name: 'caption', widget: 'string', required: false }
                   ]
                 }

@@ -21,6 +21,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@sveltejs/adapter-auto": "^7.0.1"
+    "@sveltejs/adapter-auto": "^7.0.1",
+    "marked": "^18.0.2"
   }
 }

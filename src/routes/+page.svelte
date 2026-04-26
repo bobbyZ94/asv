@@ -1,18 +1,45 @@
+<script lang="ts">
+  import { marked } from 'marked';
+  import start from '../content/sections/start.json';
+  import about from '../content/sections/about.json';
+  import events from '../content/sections/events.json';
+  import schonzeiten from '../content/sections/schonzeiten.json';
+  import membership from '../content/sections/membership.json';
+  import contact from '../content/sections/contact.json';
+
+  marked.setOptions({ breaks: false, gfm: true });
+  const md = (s: string) => marked.parse(s || '') as string;
+
+  const MONTHS_DE = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+
+  function parseDate(s: string): Date {
+    const [d, m, y] = s.split('.').map(Number);
+    return new Date(y, m - 1, d);
+  }
+
+  $: sortedEvents = [...events.events].sort(
+    (a, b) => parseDate(a.date).getTime() - parseDate(b.date).getTime()
+  );
+</script>
+
 <svelte:head>
-  <title>Angelverein - Willkommen</title>
-  <meta name="description" content="Willkommen beim Angelverein" />
+  <title>{start.title} - ASV Rotauge e.V.</title>
+  <meta name="description" content={start.subtitle} />
 </svelte:head>
 
 <!-- Hero Section -->
 <section id="hero" class="hero">
   <div class="hero-container">
     <img src="/logo.png" alt="ASV Rotauge e.V." class="hero-logo" />
-    <h1 class="hero-title">Entspannt Angeln im Verein</h1>
-    <p class="hero-subtitle">Entdecke unsere Gewässer bei Büttelborn und im Braunshardter Tännchen</p>
-    <p class="hero-subtitle hero-waters"></p>
+    <h1 class="hero-title">{start.title}</h1>
+    <p class="hero-subtitle">{start.subtitle}</p>
     <div class="hero-buttons">
-      <a href="/#about" class="btn btn-white">Über uns</a>
-      <a href="/#events" class="btn btn-secondary-white">Termine</a>
+      {#if start.button1_label}
+        <a href="/#about" class="btn btn-white">{start.button1_label}</a>
+      {/if}
+      {#if start.button2_label}
+        <a href="/#events" class="btn btn-secondary-white">{start.button2_label}</a>
+      {/if}
     </div>
   </div>
 </section>
@@ -20,30 +47,19 @@
 <!-- Über uns Section -->
 <section id="about" class="section">
   <div class="container">
-    <span class="section-label">Über uns</span>
-    <h2 class="section-title">Verein(t) seit 1950</h2>
+    <span class="section-label">{about.section_label}</span>
+    <h2 class="section-title">{about.title}</h2>
     <div class="content-grid">
-      <div class="content-main">
-        <p class="section-text">
-          Der Angelverein wurde 1950 gegründet und hat seitdem über 150 Mitglieder. Wir pflegen mehrere Gewässer in der Region und engagieren uns für den Naturschutz und nachhaltiges Angeln.
-        </p>
-        <p class="section-text">
-          Seit dem 26.08.1950 vereint der Angelverein nun bereits seine Mitglieder, die durch die Leidenschaft zum Angeln verbunden sind – damals wie heute. In 2025 dürfen wir ein besonderes Fest feiern: unser 75-jähriges Vereinsjubiläum.
-        </p>
+      <div class="content-main markdown-body">
+        {@html md(about.body)}
       </div>
       <div class="content-sidebar">
-        <div class="stat-card">
-          <span class="stat-number">150+</span>
-          <span class="stat-label">Mitglieder</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-number">75</span>
-          <span class="stat-label">Jahre</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-number">2</span>
-          <span class="stat-label">Gewässer</span>
-        </div>
+        {#each about.stats as stat}
+          <div class="stat-card">
+            <span class="stat-number">{stat.number}</span>
+            <span class="stat-label">{stat.label}</span>
+          </div>
+        {/each}
       </div>
     </div>
     <div class="map-container">
@@ -53,7 +69,7 @@
         class="gmap"
         title="Google Map showing Gewässer location"
         style="border:0;"
-        allowfullscreen=""
+        allowfullscreen
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade">
       </iframe>
@@ -64,63 +80,30 @@
 <!-- Termine Section -->
 <section id="events" class="section section-gray">
   <div class="container">
-    <span class="section-label">Termine</span>
-    <h2 class="section-title">Veranstaltungen</h2>
+    <span class="section-label">{events.section_label}</span>
+    <h2 class="section-title">{events.title}</h2>
     <div class="events-list">
-      <article class="event-card">
-        <div class="event-date">
-          <span class="event-day">15</span>
-          <span class="event-month">März</span>
-          <span class="event-year">2026</span>
-        </div>
-        <div class="event-content">
-          <span class="event-type">Arbeitsdienst</span>
-          <h3 class="event-title">Frühjahrsputz am Gewässer</h3>
-          <div class="event-meta">
-            <span class="event-location">📍 Gewässerabschnitt A</span>
-            <span class="event-time">🕘 9:00 Uhr</span>
+      {#each sortedEvents as event}
+        {@const date = parseDate(event.date)}
+        <article class="event-card">
+          <div class="event-date">
+            <span class="event-day">{String(date.getDate()).padStart(2, '0')}</span>
+            <span class="event-month">{MONTHS_DE[date.getMonth()]}</span>
+            <span class="event-year">{date.getFullYear()}</span>
           </div>
-          <p class="event-description">
-            Gemeinsam machen wir unsere Angelplätze fit für die neue Saison. Treffpunkt am Parkplatz. Bitte bringen Sie Handschuhe und entsprechende Kleidung mit.
-          </p>
-        </div>
-      </article>
-      <article class="event-card">
-        <div class="event-date">
-          <span class="event-day">05</span>
-          <span class="event-month">April</span>
-          <span class="event-year">2026</span>
-        </div>
-        <div class="event-content">
-          <span class="event-type">Jugend</span>
-          <h3 class="event-title">Jugendangeln</h3>
-          <div class="event-meta">
-            <span class="event-location">📍 Vereinsgewässer</span>
-            <span class="event-time">🕘 Ganztägig</span>
+          <div class="event-content">
+            <span class="event-type">{event.type}</span>
+            <h3 class="event-title">{event.title}</h3>
+            <div class="event-meta">
+              {#if event.location}<span class="event-location">📍 {event.location}</span>{/if}
+              {#if event.time}<span class="event-time">🕘 {event.time}</span>{/if}
+            </div>
+            {#if event.description}
+              <div class="event-description markdown-body">{@html md(event.description)}</div>
+            {/if}
           </div>
-          <p class="event-description">
-            Ein Tag für unsere jungen Angler. Kinder unter 16 Jahren können das Angeln unter Anleitung lernen. Ausrüstung kann gestellt werden. Anmeldung erforderlich.
-          </p>
-        </div>
-      </article>
-      <article class="event-card">
-        <div class="event-date">
-          <span class="event-day">20</span>
-          <span class="event-month">Juni</span>
-          <span class="event-year">2026</span>
-        </div>
-        <div class="event-content">
-          <span class="event-type">Fest</span>
-          <h3 class="event-title">Vereinsfest</h3>
-          <div class="event-meta">
-            <span class="event-location">📍 Vereinsheim</span>
-            <span class="event-time">🕘 Ab 16:00 Uhr</span>
-          </div>
-          <p class="event-description">
-            Unser jährliches Vereinsfest mit Grill, Getränken und gemütlichem Beisammensein. Alle Mitglieder und ihre Familien sind herzlich eingeladen.
-          </p>
-        </div>
-      </article>
+        </article>
+      {/each}
     </div>
   </div>
 </section>
@@ -128,11 +111,9 @@
 <!-- Schonzeiten Section -->
 <section id="schonzeiten" class="section">
   <div class="container">
-    <span class="section-label">Schonzeiten</span>
-    <h2 class="section-title">Schonzeiten beachten</h2>
-    <p class="section-text">
-      Zum Schutz unserer Fischbestände müssen folgende Schonzeiten beachtet werden:
-    </p>
+    <span class="section-label">{schonzeiten.section_label}</span>
+    <h2 class="section-title">{schonzeiten.title}</h2>
+    <div class="markdown-body section-text">{@html md(schonzeiten.intro)}</div>
     <div class="schonzeiten-table">
       <table>
         <thead>
@@ -143,26 +124,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Karpfen</td>
-            <td>01.04. - 31.05.</td>
-            <td>35 cm</td>
-          </tr>
-          <tr>
-            <td>Hecht</td>
-            <td>01.02. - 31.03.</td>
-            <td>50 cm</td>
-          </tr>
-          <tr>
-            <td>Zander</td>
-            <td>01.02. - 31.03.</td>
-            <td>45 cm</td>
-          </tr>
-          <tr>
-            <td>Barsch</td>
-            <td>01.04. - 31.05.</td>
-            <td>20 cm</td>
-          </tr>
+          {#each schonzeiten.fish as f}
+            <tr>
+              <td>{f.species}</td>
+              <td>{f.season}</td>
+              <td>{f.min_size}</td>
+            </tr>
+          {/each}
         </tbody>
       </table>
     </div>
@@ -172,39 +140,21 @@
 <!-- Mitgliedschaft Section -->
 <section id="mitgliedschaft" class="section section-gray">
   <div class="container">
-    <span class="section-label">Mitgliedschaft</span>
-    <h2 class="section-title">Mitglied werden</h2>
-    <p class="section-text">
-      Werden Sie Teil unseres Angelvereins und genießen Sie Zugang zu unseren Gewässern, regelmäßige Vereinsaktivitäten und eine starke Gemeinschaft.
-    </p>
+    <span class="section-label">{membership.section_label}</span>
+    <h2 class="section-title">{membership.title}</h2>
+    <div class="markdown-body section-text">{@html md(membership.intro)}</div>
     <div class="membership-cards">
-      <div class="membership-card">
-        <h3 class="membership-title">Erwachsene</h3>
-        <span class="membership-price">€80/Jahr</span>
-        <ul class="membership-features">
-          <li>Zugang zu allen Gewässern</li>
-          <li>Teilnahme an Veranstaltungen</li>
-          <li>Stimmrecht in der Mitgliederversammlung</li>
-        </ul>
-      </div>
-      <div class="membership-card featured">
-        <h3 class="membership-title">Familie</h3>
-        <span class="membership-price">€120/Jahr</span>
-        <ul class="membership-features">
-          <li>Zugang für 2 Erwachsene + Kinder</li>
-          <li>Teilnahme an Veranstaltungen</li>
-          <li>Jugendförderung</li>
-        </ul>
-      </div>
-      <div class="membership-card">
-        <h3 class="membership-title">Jugend</h3>
-        <span class="membership-price">€25/Jahr</span>
-        <ul class="membership-features">
-          <li>Bis 18 Jahre</li>
-          <li>Zugang zu allen Gewässern</li>
-          <li>Jugendaktivitäten</li>
-        </ul>
-      </div>
+      {#each membership.plans as plan}
+        <div class="membership-card" class:featured={plan.featured}>
+          <h3 class="membership-title">{plan.title}</h3>
+          <span class="membership-price">{plan.price}</span>
+          <ul class="membership-features">
+            {#each plan.features as feature}
+              <li>{feature}</li>
+            {/each}
+          </ul>
+        </div>
+      {/each}
     </div>
   </div>
 </section>
@@ -212,30 +162,30 @@
 <!-- Kontakt Section -->
 <section id="kontakt" class="section">
   <div class="container">
-    <span class="section-label">Kontakt</span>
-    <h2 class="section-title">Kontaktieren Sie uns</h2>
+    <span class="section-label">{contact.section_label}</span>
+    <h2 class="section-title">{contact.title}</h2>
     <div class="contact-icon-grid">
       <div class="contact-icon-card">
         <span class="card-icon">📍</span>
         <div class="card-content">
           <h4 class="card-label">Adresse</h4>
-          <p class="card-text">Angelverein Rotauge e.V.<br>Musterstraße 1<br>65824 Büttelborn</p>
+          <div class="card-text markdown-body">{@html md(contact.address)}</div>
         </div>
       </div>
-      <div class="contact-icon-card">
+      <a class="contact-icon-card" href={`mailto:${contact.email}`}>
         <span class="card-icon">📧</span>
         <div class="card-content">
           <h4 class="card-label">E-Mail</h4>
-          <p class="card-text">info@asv-rotauge.de</p>
+          <p class="card-text">{contact.email}</p>
         </div>
-      </div>
-      <div class="contact-icon-card">
+      </a>
+      <a class="contact-icon-card" href={`tel:${contact.phone.replace(/\s+/g, '')}`}>
         <span class="card-icon">📞</span>
         <div class="card-content">
           <h4 class="card-label">Telefon</h4>
-          <p class="card-text">+49 6123 456789</p>
+          <p class="card-text">{contact.phone}</p>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -282,12 +232,6 @@
     font-size: clamp(1.125rem, 3vw, 1.5rem);
     opacity: 0.9;
     margin-bottom: 1rem;
-  }
-
-  .hero-waters {
-    font-size: clamp(0.875rem, 2.5vw, 1.15rem);
-    opacity: 0.8;
-    margin-bottom: 2rem;
   }
 
   .hero-buttons {
@@ -367,6 +311,53 @@
     color: var(--color-gray-600);
     line-height: 1.8;
     margin-bottom: 2rem;
+  }
+
+  /* Markdown body styling for CMS-rendered content */
+  .markdown-body :global(p) {
+    font-size: 1.125rem;
+    color: var(--color-gray-600);
+    line-height: 1.8;
+    margin: 0 0 1rem 0;
+  }
+  .markdown-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .markdown-body :global(strong) { font-weight: 700; color: var(--color-gray-800); }
+  .markdown-body :global(em) { font-style: italic; }
+  .markdown-body :global(ul),
+  .markdown-body :global(ol) {
+    margin: 0 0 1rem 1.5rem;
+    color: var(--color-gray-600);
+    line-height: 1.8;
+  }
+  .markdown-body :global(li) { margin-bottom: 0.25rem; }
+  .markdown-body :global(blockquote) {
+    border-left: 3px solid var(--color-primary);
+    padding-left: 1rem;
+    margin: 0 0 1rem 0;
+    color: var(--color-gray-500);
+    font-style: italic;
+  }
+  .markdown-body :global(h1),
+  .markdown-body :global(h2),
+  .markdown-body :global(h3),
+  .markdown-body :global(h4) {
+    color: var(--color-gray-800);
+    margin: 1.5rem 0 0.75rem 0;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .markdown-body :global(h1) { font-size: 1.75rem; }
+  .markdown-body :global(h2) { font-size: 1.5rem; }
+  .markdown-body :global(h3) { font-size: 1.25rem; }
+  .markdown-body :global(h4) { font-size: 1.1rem; }
+  /* Compact variants */
+  .event-description.markdown-body :global(p),
+  .card-text.markdown-body :global(p) {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
   }
 
   @media (min-width: 768px) {

@@ -1,93 +1,63 @@
-<script>
-  const images = [
-    { src: '/galerie/placeholder1.svg', alt: 'Gewässer Blick 1', height: 400 },
-    { src: '/galerie/placeholder2.svg', alt: 'Angelplatz am Morgen', height: 300 },
-    { src: '/galerie/placeholder3.svg', alt: 'Fischbestand', height: 450 },
-    { src: '/galerie/placeholder4.svg', alt: 'Vereinsfest 2025', height: 350 },
-    { src: '/galerie/placeholder5.svg', alt: 'Jugendangeln', height: 400 },
-    { src: '/galerie/placeholder6.svg', alt: 'Gewässerabschnitt B', height: 500 },
-    { src: '/galerie/placeholder7.svg', alt: 'Arbeitsdienst', height: 300 },
-    { src: '/galerie/placeholder8.svg', alt: 'Sonnenuntergang am Gewässer', height: 450 },
-    { src: '/galerie/placeholder9.svg', alt: 'Mitgliederversammlung', height: 350 },
-  ];
+<script lang="ts">
+  import { marked } from 'marked';
+  import gallery from '../../content/sections/gallery.json';
+
+  marked.setOptions({ breaks: false, gfm: true });
+
+  type GalleryImage = { image: string; date?: string; caption?: string };
+
+  function parseDate(s?: string): number {
+    if (!s) return 0;
+    const [d, m, y] = s.split('.').map(Number);
+    return new Date(y, m - 1, d).getTime();
+  }
+
+  // Sort newest-first by date
+  $: sortedImages = ([...((gallery.images || []) as GalleryImage[])])
+    .sort((a, b) => parseDate(b.date) - parseDate(a.date));
+
+  // Distribute into 3 columns for masonry layout
+  $: columns = (() => {
+    const cols: GalleryImage[][] = [[], [], []];
+    sortedImages.forEach((img, i) => cols[i % 3].push(img));
+    return cols;
+  })();
 </script>
 
 <svelte:head>
-  <title>Galerie - ASV Rotauge e.V.</title>
-  <meta name="description" content="Bildergalerie des Angelvereins Rotauge e.V." />
+  <title>{gallery.title} - ASV Rotauge e.V.</title>
+  <meta name="description" content={gallery.intro || 'Bildergalerie des Angelvereins Rotauge e.V.'} />
 </svelte:head>
 
 <div class="page">
   <section class="section">
     <div class="container">
-      <span class="section-label">Galerie</span>
-      <h1 class="page-title">Bildergalerie</h1>
-      <p class="page-description">
-        Einblicke in unsere Gewässer, Vereinsaktivitäten und gemeinsame Momente.
-      </p>
-      
-      <div class="masonry-gallery">
-        <div class="masonry-column">
-          <div class="gallery-item">
-            <img src="/galerie/placeholder1.svg" alt="Gewässer Blick 1" loading="lazy" />
-            <div class="gallery-overlay">
-              <span class="gallery-caption">Gewässer Blick 1</span>
+      <span class="section-label">{gallery.section_label}</span>
+      <h1 class="page-title">{gallery.title}</h1>
+      {#if gallery.intro}
+        <div class="page-description markdown-body">{@html marked.parse(gallery.intro)}</div>
+      {/if}
+
+      {#if sortedImages.length === 0}
+        <p class="empty-state">Es wurden noch keine Bilder hochgeladen.</p>
+      {:else}
+        <div class="masonry-gallery">
+          {#each columns as column}
+            <div class="masonry-column">
+              {#each column as img}
+                <div class="gallery-item">
+                  <img src={img.image} alt={img.caption || ''} loading="lazy" />
+                  {#if img.caption}
+                    <div class="gallery-overlay">
+                      <span class="gallery-caption">{img.caption}</span>
+                    </div>
+                  {/if}
+                </div>
+              {/each}
             </div>
-          </div>
-          <div class="gallery-item">
-            <img src="/galerie/placeholder4.svg" alt="Vereinsfest 2025" loading="lazy" />
-            <div class="gallery-overlay">
-              <span class="gallery-caption">Vereinsfest 2025</span>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="/galerie/placeholder7.svg" alt="Arbeitsdienst" loading="lazy" />
-            <div class="gallery-overlay">
-              <span class="gallery-caption">Arbeitsdienst</span>
-            </div>
-          </div>
+          {/each}
         </div>
-        <div class="masonry-column">
-          <div class="gallery-item">
-            <img src="/galerie/placeholder2.svg" alt="Angelplatz am Morgen" loading="lazy" />
-            <div class="gallery-overlay">
-              <span class="gallery-caption">Angelplatz am Morgen</span>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="/galerie/placeholder5.svg" alt="Jugendangeln" loading="lazy" />
-            <div class="gallery-overlay">
-              <span class="gallery-caption">Jugendangeln</span>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="/galerie/placeholder8.svg" alt="Sonnenuntergang am Gewässer" loading="lazy" />
-            <div class="gallery-overlay">
-              <span class="gallery-caption">Sonnenuntergang am Gewässer</span>
-            </div>
-          </div>
-        </div>
-        <div class="masonry-column">
-          <div class="gallery-item">
-            <img src="/galerie/placeholder3.svg" alt="Fischbestand" loading="lazy" />
-            <div class="gallery-overlay">
-              <span class="gallery-caption">Fischbestand</span>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="/galerie/placeholder6.svg" alt="Gewässerabschnitt B" loading="lazy" />
-            <div class="gallery-overlay">
-              <span class="gallery-caption">Gewässerabschnitt B</span>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="/galerie/placeholder9.svg" alt="Mitgliederversammlung" loading="lazy" />
-            <div class="gallery-overlay">
-              <span class="gallery-caption">Mitgliederversammlung</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/if}
     </div>
   </section>
 </div>
@@ -133,6 +103,18 @@
     line-height: 1.6;
     margin: 0 0 3rem 0;
     max-width: 700px;
+  }
+
+  .markdown-body :global(p) { margin: 0 0 1rem 0; }
+  .markdown-body :global(p:last-child) { margin-bottom: 0; }
+  .markdown-body :global(strong) { font-weight: 700; }
+  .markdown-body :global(em) { font-style: italic; }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: var(--color-gray-500);
+    font-size: 1.125rem;
   }
 
   .masonry-gallery {
