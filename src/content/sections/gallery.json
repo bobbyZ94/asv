@@ -1,6 +1,47 @@
 {
   "section_label": "Galerie",
   "title": "Eindrücke aus dem Vereinsleben",
-  "intro": "",
-  "images": []
+  "intro": "\n\n\n",
+  "images": [
+    {
+      "date": "2026-04-26",
+      "caption": "Test",
+      "image": "/uploads/james-wheeler-hjhgcu_ibsq-unsplash.jpg"
+    },
+    {
+      "date": "2026-04-26",
+      "image": "/uploads/mathieu-le-roux-6_hqvy1e7ni-unsplash.jpg",
+      "caption": "Test2"
+    },
+    {
+      "date": "26.04.2026",
+      "image": "/uploads/greysen-johnson-czvzzfadtmc-unsplash.jpg",
+      "caption": "Test3"
+    },
+    {
+      "date": "26.04.2026",
+      "image": "/uploads/jakob-owens-veobb3p5yoi-unsplash.jpg",
+      "caption": "Test4"
+    },
+    {
+      "date": "26.04.2026",
+      "image": "/uploads/vidar-nordli-mathisen-yjkb_4vjywa-unsplash.jpg",
+      "caption": "Test5"
+    },
+    {
+      "date": "26.04.2026",
+      "image": "/uploads/wes-walker-wdcibbj1eg0-unsplash.jpg",
+      "caption": "Test 5"
+    },
+    {
+      "date": "26.04.2026",
+      "image": "/uploads/sticker-mule-qnhsttawqri-unsplash.jpg",
+      "caption": "Test 6"
+    },
+    {
+      "date": "26.04.2026",
+      "image": "/uploads/mathieu-le-roux-6_hqvy1e7ni-unsplash.jpg",
+      "caption": "Test7"
+    }
+  ]
 }
