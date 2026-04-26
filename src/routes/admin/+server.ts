@@ -8,10 +8,28 @@ const HTML = `<!DOCTYPE html>
   <meta name="robots" content="noindex" />
   <title>Admin - ASV Rotauge</title>
   <link rel="stylesheet" href="https://unpkg.com/@staticcms/app@^4.0.0/dist/main.css" />
+  <style>
+    /* Hide "Jetzt" / "Now" button on datetime pickers */
+    button[data-testid="datetime-now"] { display: none !important; }
+  </style>
 </head>
 <body>
   <script src="https://unpkg.com/@staticcms/app@^4.0.0/dist/static-cms-app.js"></script>
   <script>
+    const markdown = (label, name, required) => ({
+      label,
+      name,
+      widget: 'markdown',
+      required: required !== false,
+      editor_components: [],
+      toolbar_buttons: {
+        main: ['bold', 'italic', 'strikethrough', 'font', 'unordered-list', 'ordered-list', 'blockquote'],
+        empty: [],
+        selection: []
+      }
+    });
+    const noPreview = { preview: false };
+
     CMS.init({
       config: {
         locale: 'de',
@@ -28,36 +46,37 @@ const HTML = `<!DOCTYPE html>
           {
             name: 'start',
             label: 'Start',
+            editor: noPreview,
             files: [{
               name: 'start',
-              label: 'Start (Hero-Banner)',
+              label: 'Start',
               file: 'src/content/sections/start.json',
               description: 'Text unter dem Logo auf dem Hero-Banner.',
+              editor: noPreview,
               fields: [
-                { label: 'Titel', name: 'title', widget: 'string', hint: 'Große Überschrift unter dem Logo' },
-                { label: 'Untertitel', name: 'subtitle', widget: 'string', hint: 'Kleinerer Text unter der Überschrift' },
-                { label: 'Button 1 - Beschriftung', name: 'button1_label', widget: 'string', required: false },
-                { label: 'Button 2 - Beschriftung', name: 'button2_label', widget: 'string', required: false }
+                { label: 'Titel', name: 'title', widget: 'string' },
+                { label: 'Untertitel', name: 'subtitle', widget: 'string' },
               ]
             }]
           },
           {
             name: 'about',
             label: 'Über Uns',
-            editor: { preview: false },
+            editor: noPreview,
             files: [{
               name: 'about',
               label: 'Über Uns',
               file: 'src/content/sections/about.json',
-              editor: { preview: false },
+              editor: noPreview,
               fields: [
-                { label: 'Bereichsbezeichnung', name: 'section_label', widget: 'string', hint: 'Kleiner Text über dem Titel' },
+                { label: 'Bereichsbezeichnung', name: 'section_label', widget: 'string'},
                 { label: 'Titel', name: 'title', widget: 'string' },
-                { label: 'Text', name: 'body', widget: 'markdown' },
+                markdown('Text', 'body'),
                 {
                   label: 'Statistik-Karten',
                   name: 'stats',
                   widget: 'list',
+                  collapsed: true,
                   summary: '{{fields.number}} {{fields.label}}',
                   fields: [
                     { label: 'Zahl', name: 'number', widget: 'string' },
@@ -70,10 +89,12 @@ const HTML = `<!DOCTYPE html>
           {
             name: 'events',
             label: 'Termine',
+            editor: noPreview,
             files: [{
               name: 'events',
               label: 'Termine',
               file: 'src/content/sections/events.json',
+              editor: noPreview,
               fields: [
                 { label: 'Bereichsbezeichnung', name: 'section_label', widget: 'string' },
                 { label: 'Titel', name: 'title', widget: 'string' },
@@ -81,16 +102,23 @@ const HTML = `<!DOCTYPE html>
                   label: 'Veranstaltungen',
                   name: 'events',
                   widget: 'list',
-                  summary: '{{fields.day}}.{{fields.month}} {{fields.year}} - {{fields.title}}',
+                  collapsed: true,
+                  summary: '{{fields.date}} - {{fields.title}}',
                   fields: [
-                    { label: 'Tag', name: 'day', widget: 'string', hint: 'z.B. 15' },
-                    { label: 'Monat', name: 'month', widget: 'string', hint: 'z.B. März' },
-                    { label: 'Jahr', name: 'year', widget: 'string', hint: 'z.B. 2026' },
+                    {
+                      label: 'Datum',
+                      name: 'date',
+                      widget: 'datetime',
+                      date_format: 'dd.MM.yyyy',
+                      time_format: false,
+                      format: 'dd-MM-yyyy',
+                      picker_utc: false,
+                    },
                     { label: 'Typ', name: 'type', widget: 'select', options: ['Arbeitsdienst', 'Jugend', 'Versammlung', 'Fest', 'Sonstiges'] },
                     { label: 'Titel', name: 'title', widget: 'string' },
                     { label: 'Ort', name: 'location', widget: 'string' },
                     { label: 'Uhrzeit', name: 'time', widget: 'string' },
-                    { label: 'Beschreibung', name: 'description', widget: 'text' }
+                    markdown('Beschreibung', 'description')
                   ]
                 }
               ]
@@ -99,18 +127,21 @@ const HTML = `<!DOCTYPE html>
           {
             name: 'schonzeiten',
             label: 'Schonzeiten',
+            editor: noPreview,
             files: [{
               name: 'schonzeiten',
               label: 'Schonzeiten',
               file: 'src/content/sections/schonzeiten.json',
+              editor: noPreview,
               fields: [
                 { label: 'Bereichsbezeichnung', name: 'section_label', widget: 'string' },
                 { label: 'Titel', name: 'title', widget: 'string' },
-                { label: 'Einführungstext', name: 'intro', widget: 'text' },
+                markdown('Einführungstext', 'intro'),
                 {
                   label: 'Fischarten',
                   name: 'fish',
                   widget: 'list',
+                  collapsed: true,
                   summary: '{{fields.species}} - {{fields.season}}',
                   fields: [
                     { label: 'Fischart', name: 'species', widget: 'string' },
@@ -124,18 +155,21 @@ const HTML = `<!DOCTYPE html>
           {
             name: 'membership',
             label: 'Mitgliedschaft',
+            editor: noPreview,
             files: [{
               name: 'membership',
               label: 'Mitgliedschaft',
               file: 'src/content/sections/membership.json',
+              editor: noPreview,
               fields: [
                 { label: 'Bereichsbezeichnung', name: 'section_label', widget: 'string' },
                 { label: 'Titel', name: 'title', widget: 'string' },
-                { label: 'Einführungstext', name: 'intro', widget: 'text' },
+                markdown('Einführungstext', 'intro'),
                 {
                   label: 'Mitgliedschafts-Optionen',
                   name: 'plans',
                   widget: 'list',
+                  collapsed: true,
                   summary: '{{fields.title}} - {{fields.price}}',
                   fields: [
                     { label: 'Titel', name: 'title', widget: 'string' },
@@ -155,14 +189,16 @@ const HTML = `<!DOCTYPE html>
           {
             name: 'contact',
             label: 'Kontakt',
+            editor: noPreview,
             files: [{
               name: 'contact',
               label: 'Kontakt',
               file: 'src/content/sections/contact.json',
+              editor: noPreview,
               fields: [
                 { label: 'Bereichsbezeichnung', name: 'section_label', widget: 'string' },
                 { label: 'Titel', name: 'title', widget: 'string' },
-                { label: 'Adresse', name: 'address', widget: 'text' },
+                markdown('Adresse', 'address'),
                 { label: 'E-Mail', name: 'email', widget: 'string' },
                 { label: 'Telefon', name: 'phone', widget: 'string' }
               ]
@@ -171,18 +207,21 @@ const HTML = `<!DOCTYPE html>
           {
             name: 'gallery',
             label: 'Galerie',
+            editor: noPreview,
             files: [{
               name: 'gallery',
               label: 'Galerie',
               file: 'src/content/sections/gallery.json',
+              editor: noPreview,
               fields: [
                 { label: 'Bereichsbezeichnung', name: 'section_label', widget: 'string' },
                 { label: 'Titel', name: 'title', widget: 'string' },
-                { label: 'Einführungstext', name: 'intro', widget: 'text', required: false },
+                markdown('Einführungstext', 'intro', false),
                 {
                   label: 'Bilder',
                   name: 'images',
                   widget: 'list',
+                  collapsed: true,
                   summary: '{{fields.caption}}',
                   fields: [
                     { label: 'Bild', name: 'image', widget: 'image' },

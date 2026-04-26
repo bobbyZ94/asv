@@ -3,9 +3,7 @@
   "title": "Veranstaltungen",
   "events": [
     {
-      "day": "15",
-      "month": "März",
-      "year": "2026",
+      "date": "2026-03-15",
       "type": "Arbeitsdienst",
       "title": "Frühjahrsputz am Gewässer",
       "location": "Gewässerabschnitt A",
@@ -13,9 +11,7 @@
       "description": "Gemeinsam machen wir unsere Angelplätze fit für die neue Saison. Treffpunkt am Parkplatz. Bitte bringen Sie Handschuhe und entsprechende Kleidung mit."
     },
     {
-      "day": "05",
-      "month": "April",
-      "year": "2026",
+      "date": "2026-04-05",
       "type": "Jugend",
       "title": "Jugendangeln",
       "location": "Vereinsgewässer",
@@ -23,9 +19,7 @@
       "description": "Ein Tag für unsere jungen Angler. Kinder unter 16 Jahren können das Angeln unter Anleitung lernen. Ausrüstung kann gestellt werden. Anmeldung erforderlich."
     },
     {
-      "day": "20",
-      "month": "Juni",
-      "year": "2026",
+      "date": "2026-06-20",
       "type": "Fest",
       "title": "Vereinsfest",
       "location": "Vereinsheim",
