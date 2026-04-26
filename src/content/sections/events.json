@@ -10,7 +10,8 @@
       "title": "Frühjahrsputz am Gewässer",
       "location": "Gewässerabschnitt A",
       "time": "9:00 Uhr",
-      "description": "Gemeinsam machen wir unsere Angelplätze fit für die neue Saison. Treffpunkt am Parkplatz. Bitte bringen Sie Handschuhe und entsprechende Kleidung mit."
+      "description": "Gemeinsam machen wir unsere Angelplätze fit für die neue Saison. Treffpunkt am Parkplatz. Bitte bringen Sie Handschuhe und entsprechende Kleidung mit.",
+      "date": "2026-04-26"
     },
     {
       "day": "05",
@@ -20,7 +21,8 @@
       "title": "Jugendangeln",
       "location": "Vereinsgewässer",
       "time": "Ganztägig",
-      "description": "Ein Tag für unsere jungen Angler. Kinder unter 16 Jahren können das Angeln unter Anleitung lernen. Ausrüstung kann gestellt werden. Anmeldung erforderlich."
+      "description": "Ein Tag für unsere jungen Angler. Kinder unter 16 Jahren können das Angeln unter Anleitung lernen. Ausrüstung kann gestellt werden. Anmeldung erforderlich.",
+      "date": "2026-06-06"
     },
     {
       "day": "20",
@@ -30,7 +32,8 @@
       "title": "Vereinsfest",
       "location": "Vereinsheim",
       "time": "Ab 16:00 Uhr",
-      "description": "Unser jährliches Vereinsfest mit Grill, Getränken und gemütlichem Beisammensein. Alle Mitglieder und ihre Familien sind herzlich eingeladen."
+      "description": "Unser jährliches Vereinsfest mit Grill, Getränken und gemütlichem Beisammensein. Alle Mitglieder und ihre Familien sind herzlich eingeladen.",
+      "date": "2026-04-26"
     }
   ]
 }
