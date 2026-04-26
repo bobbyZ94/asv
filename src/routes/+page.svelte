@@ -11,8 +11,8 @@
     <p class="hero-subtitle">Entdecke unsere Gewässer bei Büttelborn und im Braunshardter Tännchen</p>
     <p class="hero-subtitle hero-waters"></p>
     <div class="hero-buttons">
-      <a href="#about" class="btn btn-white">Über uns</a>
-      <a href="#events" class="btn btn-secondary-white">Termine</a>
+      <a href="/#about" class="btn btn-white">Über uns</a>
+      <a href="/#events" class="btn btn-secondary-white">Termine</a>
     </div>
   </div>
 </section>
@@ -46,6 +46,18 @@
         </div>
       </div>
     </div>
+    <div class="map-container">
+      <h3 class="map-title">Unsere Gewässer</h3>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3208.6877617221794!2d8.548115254881463!3d49.905807518889695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bd776156d76485%3A0xb9dcf0055cd5e666!2sFischteich!5e1!3m2!1sde!2snl!4v1777189216918!5m2!1sde!2snl"
+        class="gmap"
+        title="Google Map showing Gewässer location"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
   </div>
 </section>
 
@@ -59,6 +71,7 @@
         <div class="event-date">
           <span class="event-day">15</span>
           <span class="event-month">März</span>
+          <span class="event-year">2026</span>
         </div>
         <div class="event-content">
           <span class="event-type">Arbeitsdienst</span>
@@ -76,6 +89,7 @@
         <div class="event-date">
           <span class="event-day">05</span>
           <span class="event-month">April</span>
+          <span class="event-year">2026</span>
         </div>
         <div class="event-content">
           <span class="event-type">Jugend</span>
@@ -93,6 +107,7 @@
         <div class="event-date">
           <span class="event-day">20</span>
           <span class="event-month">Juni</span>
+          <span class="event-year">2026</span>
         </div>
         <div class="event-content">
           <span class="event-type">Fest</span>
@@ -199,38 +214,27 @@
   <div class="container">
     <span class="section-label">Kontakt</span>
     <h2 class="section-title">Kontaktieren Sie uns</h2>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <div class="contact-item">
-          <span class="contact-icon">📍</span>
-          <div>
-            <h4 class="contact-label">Adresse</h4>
-            <p class="contact-text">Angelverein Rotauge e.V.<br>Musterstraße 1<br>65824 Büttelborn</p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <span class="contact-icon">📧</span>
-          <div>
-            <h4 class="contact-label">E-Mail</h4>
-            <p class="contact-text">info@asv-rotauge.de</p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <span class="contact-icon">📞</span>
-          <div>
-            <h4 class="contact-label">Telefon</h4>
-            <p class="contact-text">+49 6123 456789</p>
-          </div>
+    <div class="contact-icon-grid">
+      <div class="contact-icon-card">
+        <span class="card-icon">📍</span>
+        <div class="card-content">
+          <h4 class="card-label">Adresse</h4>
+          <p class="card-text">Angelverein Rotauge e.V.<br>Musterstraße 1<br>65824 Büttelborn</p>
         </div>
       </div>
-      <div class="contact-form">
-        <h3 class="form-title">Nachricht senden</h3>
-        <form class="form">
-          <input type="text" placeholder="Name" class="form-input" />
-          <input type="email" placeholder="E-Mail" class="form-input" />
-          <textarea placeholder="Ihre Nachricht" class="form-textarea" rows="5"></textarea>
-          <button type="submit" class="btn btn-primary">Senden</button>
-        </form>
+      <div class="contact-icon-card">
+        <span class="card-icon">📧</span>
+        <div class="card-content">
+          <h4 class="card-label">E-Mail</h4>
+          <p class="card-text">info@asv-rotauge.de</p>
+        </div>
+      </div>
+      <div class="contact-icon-card">
+        <span class="card-icon">📞</span>
+        <div class="card-content">
+          <h4 class="card-label">Telefon</h4>
+          <p class="card-text">+49 6123 456789</p>
+        </div>
       </div>
     </div>
   </div>
@@ -326,15 +330,6 @@
   .btn-secondary-white:hover {
     background: var(--color-white);
     color: var(--color-primary);
-  }
-
-  .btn-primary {
-    background: var(--color-primary);
-    color: var(--color-white);
-  }
-
-  .btn-primary:hover {
-    background: var(--color-primary-dark);
   }
 
   /* Sections */
@@ -467,6 +462,13 @@
     letter-spacing: 0.05em;
   }
 
+  .event-year {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-gray-500);
+    margin-top: 0.25rem;
+  }
+
   .event-type {
     display: inline-block;
     font-size: 0.625rem;
@@ -549,22 +551,7 @@
     padding: 2rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
-    transition: var(--transition);
     border: 2px solid transparent;
-  }
-
-  .membership-card.featured {
-    border-color: var(--color-primary);
-    transform: scale(1.05);
-  }
-
-  .membership-card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
-  }
-
-  .membership-card.featured:hover {
-    transform: scale(1.05) translateY(-2px);
   }
 
   .membership-title {
@@ -602,63 +589,90 @@
   }
 
   /* Contact Section */
-  .contact-grid {
+  .contact-icon-grid {
     display: grid;
-    gap: 3rem;
+    gap: 2rem;
     margin-top: 2rem;
   }
 
   @media (min-width: 768px) {
-    .contact-grid {
-      grid-template-columns: 1fr 1fr;
+    .contact-icon-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  .contact-item {
+  .contact-icon-card {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    align-items: center;
+    gap: 1.5rem;
+    background: var(--color-white);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    text-align: left;
+    text-decoration: none;
+    color: inherit;
   }
 
-  .contact-icon {
-    font-size: 1.5rem;
+  .card-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+    flex-shrink: 0;
   }
 
-  .contact-label {
-    font-size: 0.875rem;
+  @media (max-width: 767px) {
+    .contact-icon-card {
+      padding: 1.25rem;
+      gap: 1rem;
+    }
+
+    .card-icon {
+      font-size: 1.75rem;
+    }
+
+    .card-label {
+      font-size: 1rem;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+    }
+  }
+
+  .card-content {
+    flex: 1;
+  }
+
+  .card-label {
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-gray-800);
-    margin-bottom: 0.25rem;
+    margin: 0 0 0.5rem 0;
   }
 
-  .contact-text {
+  .card-text {
     color: var(--color-gray-600);
     line-height: 1.6;
+    font-size: 1.05rem;
+    margin: 0;
   }
 
-  .form-title {
+  /* Map Container */
+  .map-container {
+    margin-top: 3rem;
+  }
+
+  .map-title {
     font-size: 1.25rem;
     color: var(--color-gray-800);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .form-input, .form-textarea {
-    padding: 0.875rem;
-    border: 1px solid var(--color-gray-300);
+  .gmap {
+    width: 100%;
+    height: 400px;
+    border: none;
     border-radius: var(--radius);
-    font-family: inherit;
-    font-size: 1rem;
-  }
-
-  .form-input:focus, .form-textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    box-shadow: var(--shadow-sm);
   }
 </style>

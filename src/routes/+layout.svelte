@@ -1,26 +1,31 @@
-<script lang="ts">
+<script>
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
 
   let isMenuOpen = false;
   let isScrolled = false;
+  let currentYear = new Date().getFullYear();
+
+  const navItems = [
+    { href: '/#about', label: 'Über uns' },
+    { href: '/#events', label: 'Termine' },
+    { href: '/#schonzeiten', label: 'Schonzeiten' },
+    { href: '/#mitgliedschaft', label: 'Mitgliedschaft' },
+    { href: '/#kontakt', label: 'Kontakt' },
+    { href: '/galerie', label: 'Galerie' }
+  ];
 
   onMount(() => {
     const handleScroll = () => {
       isScrolled = window.scrollY > 50;
     };
+    
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   });
-
-  const navItems = [
-    { href: '#hero', label: 'Start' },
-    { href: '#about', label: 'Über uns' },
-    { href: '#events', label: 'Termine' },
-    { href: '#schonzeiten', label: 'Schonzeiten' },
-    { href: '#mitgliedschaft', label: 'Mitgliedschaft' },
-    { href: '#kontakt', label: 'Kontakt' }
-  ];
 </script>
 
 <div class="site">
@@ -42,7 +47,7 @@
         <ul class="nav-list">
           {#each navItems as item}
             <li>
-              <a href={item.href} class="nav-link" class:active={$page.url.pathname === item.href} on:click={() => isMenuOpen = false}>{item.label}</a>
+              <a href={item.href} class="nav-link" on:click={() => isMenuOpen = false}>{item.label}</a>
             </li>
           {/each}
         </ul>
@@ -56,27 +61,14 @@
 
   <footer class="footer">
     <div class="footer-container">
-      <div class="footer-grid">
-        <div class="footer-section">
-          <h4 class="footer-title">Angelverein</h4>
-          <p class="footer-text">Der einzig wahre Angelverein – im wunderschönen Nettetal.</p>
-        </div>
-        <div class="footer-section">
-          <h4 class="footer-title">Links</h4>
-          <ul class="footer-links">
-            <li><a href="/">Start</a></li>
-            <li><a href="/about">Über uns</a></li>
-            <li><a href="/news">News</a></li>
-            <li><a href="/events">Termine</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4 class="footer-title">Kontakt</h4>
-          <p class="footer-text">E-Mail: info@angelverein.de<br>Tel: 0123 / 456789</p>
-        </div>
-      </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Angelverein. Alle Rechte vorbehalten.</p>
+        <div class="footer-links">
+          <a href="/impressum" class="footer-link">Impressum</a>
+          <span class="footer-separator">|</span>
+          <a href="/datenschutz" class="footer-link">Datenschutz</a>
+        </div>
+        <img src="/logo.png" alt="ASV Rotauge e.V." class="footer-logo" />
+        <p>&copy; {currentYear} ASV Rotauge e.V. <br>Alle Rechte vorbehalten.</p>
       </div>
     </div>
   </footer>
@@ -94,14 +86,19 @@
     --color-white: #ffffff;
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --radius: 0.5rem;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --transition: all 0.3s ease;
+  }
+
+  :global(html) {
+    scroll-padding-top: 72px;
+    scroll-behavior: smooth;
   }
 
   :global(*) { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :global(html) { scroll-behavior: smooth; }
   :global(body) {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6;
@@ -144,32 +141,27 @@
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  .nav { position: fixed; top: 0; right: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--color-white); box-shadow: var(--shadow-md); transition: var(--transition); padding-top: 80px; }
+  .nav { position: fixed; top: 72px; right: -100%; width: 100%; height: calc(100vh - 72px); background: var(--color-white); box-shadow: var(--shadow-md); transition: var(--transition); display: flex; flex-direction: column; align-items: center; justify-content: center; }
   .nav.open { right: 0; }
-  .nav-list { list-style: none; padding: 1rem; }
-  .nav-list li { margin-bottom: 0.5rem; }
-  .nav-link { display: block; padding: 0.75rem 1rem; color: var(--color-gray-700); font-weight: 500; text-decoration: none; border-radius: var(--radius); transition: var(--transition); white-space: nowrap; }
-  .nav-link:hover, .nav-link.active { background: var(--color-gray-100); color: var(--color-primary); }
-  .nav-separator { height: 1px; background: var(--color-gray-200); margin: 0.5rem 1rem; }
-  @media (min-width: 768px) { .nav-separator { display: none; } }
+  .nav-list { list-style: none; padding: 0; text-align: center; }
+  .nav-list li { margin-bottom: 1rem; }
+  .nav-link { display: inline-block; padding: 1rem 2rem; color: var(--color-gray-700); font-weight: 500; text-decoration: none; border-radius: var(--radius); transition: var(--transition); white-space: nowrap; font-size: 1.25rem; }
+  .nav-link:hover { background: var(--color-gray-100); color: var(--color-primary); }
 
   @media (min-width: 768px) {
     .menu-toggle { display: none; }
     .nav { position: static; width: auto; height: auto; background: none; box-shadow: none; padding-top: 0; }
     .nav-list { display: flex; gap: 0.5rem; padding: 0; }
     .nav-list li { margin-bottom: 0; }
-    .nav-link { padding: 0.5rem 1rem; }
+    .nav-link { padding: 0.5rem 1rem; font-size: 1.05rem; }
   }
 
-  .footer { background: var(--color-gray-800); color: var(--color-gray-300); padding: 3rem 0 1.5rem; }
+  .footer { background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%); color: var(--color-white); padding: 3rem 0; }
   .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-  .footer-grid { display: grid; gap: 2rem; margin-bottom: 2rem; }
-  @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
-  .footer-title { color: var(--color-white); font-size: 1.125rem; margin-bottom: 1rem; }
-  .footer-text { line-height: 1.8; }
-  .footer-links { list-style: none; }
-  .footer-links li { margin-bottom: 0.5rem; }
-  .footer-links a { color: var(--color-gray-300); }
-  .footer-links a:hover { color: var(--color-white); }
-  .footer-bottom { border-top: 1px solid var(--color-gray-700); padding-top: 1.5rem; text-align: center; font-size: 0.875rem; }
+  .footer-bottom { display: flex; flex-direction: column; align-items: center; gap: 2rem; text-align: center; }
+  .footer-links { display: flex; align-items: center; gap: 0.75rem; }
+  .footer-link { color: var(--color-white); text-decoration: none; transition: var(--transition); }
+  .footer-link:hover { color: var(--color-white); text-decoration: underline; }
+  .footer-separator { color: rgba(255, 255, 255, 0.5); }
+  .footer-logo { height: 120px; width: auto; }
 </style>
