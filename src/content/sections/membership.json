@@ -6,7 +6,7 @@
     {
       "title": "Erwachsene",
       "price": "€80/Jahr",
-      "featured": false,
+      "featured": true,
       "features": [
         "Zugang zu allen Gewässern",
         "Teilnahme an Veranstaltungen",
@@ -33,5 +33,6 @@
         "Jugendaktivitäten"
       ]
     }
-  ]
+  ],
+  "outro": "Schreiben Sie uns einfach eine kurze E-Mail an **info@asv-rotauge.de** bezüglich Ihrem Wunsch nach einer Mitgliedschaft. Wir melden uns mit weiteren Informationen zügig zurück!\n"
 }
