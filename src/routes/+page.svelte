@@ -168,6 +168,14 @@
         </div>
       {/each}
     </div>
+    {#if membership.disclaimer}
+      <p class="membership-disclaimer">
+        {membership.disclaimer}
+        {#if membership.disclaimer_file}
+          <a href={membership.disclaimer_file} target="_blank" rel="noopener noreferrer" class="membership-disclaimer-link">hier</a>.
+        {/if}
+      </p>
+    {/if}
   </div>
 </section>
 
@@ -600,6 +608,18 @@
     font-size: 0.75rem;
     font-weight: 400;
     color: var(--color-gray-500);
+  }
+
+  .membership-disclaimer {
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--color-gray-500);
+    text-align: center;
+  }
+
+  .membership-disclaimer-link {
+    color: var(--color-primary);
+    text-decoration: underline;
   }
 
   /* Contact Section */

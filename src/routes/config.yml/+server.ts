@@ -115,6 +115,8 @@ collections:
           - { label: Bereichsbezeichnung, name: section_label, widget: string }
           - { label: Titel, name: title, widget: string }
           - { label: Einführungstext, name: intro, widget: markdown, required: true, editor_components: [] }
+          - { label: Disclaimer-Text, name: disclaimer, widget: string, required: false }
+          - { label: Gebührenordnung PDF, name: disclaimer_file, widget: file, required: false, media_folder: static/uploads, public_folder: /uploads }
       - name: membership_erwachsene
         label: Beiträge - Erwachsene
         file: src/content/sections/membership_erwachsene.json
