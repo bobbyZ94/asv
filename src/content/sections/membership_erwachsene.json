@@ -1,8 +1,12 @@
 {
   "entries": [
     {
-      "label": "Test",
-      "price": "2341245"
+      "label": "Ab 18 Jahren",
+      "price": "50€"
+    },
+    {
+      "label": "Rentner ",
+      "price": "40"
     }
   ]
 }
