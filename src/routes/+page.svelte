@@ -169,12 +169,12 @@
       {/each}
     </div>
     {#if membership.disclaimer}
-      <p class="membership-disclaimer">
-        {membership.disclaimer}
+      <div class="membership-disclaimer">
+        <p>{membership.disclaimer}</p>
         {#if membership.disclaimer_file}
-          <a href={membership.disclaimer_file} target="_blank" rel="noopener noreferrer" class="membership-disclaimer-link">hier</a>.
+          <a href={membership.disclaimer_file} download class="membership-disclaimer-btn">⬇ Download</a>
         {/if}
-      </p>
+      </div>
     {/if}
   </div>
 </section>
@@ -611,15 +611,31 @@
   }
 
   .membership-disclaimer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-top: 1.5rem;
-    font-size: 0.875rem;
-    color: var(--color-gray-500);
-    text-align: center;
+    color: var(--color-gray-600);
   }
 
-  .membership-disclaimer-link {
-    color: var(--color-primary);
-    text-decoration: underline;
+  .membership-disclaimer-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.1rem;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .membership-disclaimer-btn:hover {
+    background: var(--color-primary-dark);
   }
 
   /* Contact Section */
