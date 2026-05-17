@@ -7,26 +7,19 @@ const HTML = `<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Admin - ASV Rotauge</title>
-  <link rel="stylesheet" href="https://unpkg.com/@staticcms/app@^4.0.0/dist/main.css" />
-  <style>
-    /* Hide "Jetzt" / "Now" button on datetime pickers */
-    button[data-testid="datetime-now"] { display: none !important; }
-  </style>
+  <meta name="cms-config-url" content="/admin/config.yml" />
 </head>
 <body>
-  <script src="https://unpkg.com/@staticcms/app@^4.0.0/dist/static-cms-app.js"></script>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script src="https://unpkg.com/decap-cms-locales@^3.0.0/dist/decap-cms-locales.js"></script>
   <script>
+    CMS.registerLocale('de', window.DecapCmsLocales.de);
     const markdown = (label, name, required) => ({
       label,
       name,
       widget: 'markdown',
       required: required !== false,
-      editor_components: [],
-      toolbar_buttons: {
-        main: ['bold', 'italic', 'strikethrough', 'font', 'unordered-list', 'ordered-list', 'blockquote'],
-        empty: [],
-        selection: []
-      }
+      editor_components: []
     });
     const noPreview = { preview: false };
 
@@ -34,11 +27,11 @@ const HTML = `<!DOCTYPE html>
       config: {
         locale: 'de',
         backend: {
-          name: 'gitlab',
-          repo: 'r.zioltkowski/asv',
+          name: 'github',
+          repo: 'bobbyZ94/asv',
           branch: 'main',
-          auth_type: 'pkce',
-          app_id: '5353a5d31a12c810d32579be2e0eae5f15f47ebaf41877d80dd64c1b1f791968'
+          base_url: 'https://sveltia-cms-auth.r-zioltkowski.workers.dev',
+          auth_endpoint: 'auth'
         },
         media_folder: 'static/uploads',
         public_folder: '/uploads',
@@ -172,20 +165,24 @@ const HTML = `<!DOCTYPE html>
                 { label: 'Titel', name: 'title', widget: 'string' },
                 markdown('Einführungstext', 'intro'),
                 {
-                  label: 'Mitgliedschafts-Optionen',
-                  label_singular: 'Mitgliedschafts-Option',
-                  name: 'plans',
+                  label: 'Kategorien',
+                  label_singular: 'Kategorie',
+                  name: 'categories',
                   widget: 'list',
                   collapsed: true,
-                  summary: '{{fields.title}} - {{fields.price}}',
+                  summary: '{{fields.title}}',
                   fields: [
-                    { label: 'Titel', name: 'title', widget: 'string' },
-                    { label: 'Preis', name: 'price', widget: 'string' },
+                    { label: 'Kategorie', name: 'title', widget: 'string' },
                     {
-                      label: 'Vorteile',
-                      name: 'features',
+                      label: 'Beiträge',
+                      label_singular: 'Beitrag',
+                      name: 'entries',
                       widget: 'list',
-                      field: { label: 'Vorteil', name: 'feature', widget: 'string' }
+                      summary: '{{fields.label}} - {{fields.price}}',
+                      fields: [
+                        { label: 'Bezeichnung', name: 'label', widget: 'string' },
+                        { label: 'Preis', name: 'price', widget: 'string' }
+                      ]
                     }
                   ]
                 }

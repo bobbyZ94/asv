@@ -5,7 +5,17 @@
   import events from '../content/sections/events.json';
   import schonzeiten from '../content/sections/schonzeiten.json';
   import membership from '../content/sections/membership.json';
+  import membershipErwachsene from '../content/sections/membership_erwachsene.json';
+  import membershipKinder from '../content/sections/membership_kinder.json';
+  import membershipFamilie from '../content/sections/membership_familie.json';
+
   import contact from '../content/sections/contact.json';
+
+  const membershipCategories = [
+    { title: 'Erwachsene', entries: membershipErwachsene.entries },
+    { title: 'Kinder', entries: membershipKinder.entries },
+    { title: 'Familie', entries: membershipFamilie.entries }
+  ];
 
   marked.setOptions({ breaks: false, gfm: true });
   const md = (s: string) => marked.parse(s || '') as string;
@@ -17,9 +27,9 @@
     return new Date(y, m - 1, d);
   }
 
-  $: sortedEvents = [...events.events].sort(
+  let sortedEvents = $derived([...events.events].sort(
     (a, b) => parseDate(a.date).getTime() - parseDate(b.date).getTime()
-  );
+  ));
 </script>
 
 <svelte:head>
@@ -143,14 +153,16 @@
     <span class="section-label">{membership.section_label}</span>
     <h2 class="section-title">{membership.title}</h2>
     <div class="markdown-body section-text">{@html md(membership.intro)}</div>
-    <div class="membership-cards">
-      {#each membership.plans as plan}
-        <div class="membership-card" class:featured={plan.featured}>
-          <h3 class="membership-title">{plan.title}</h3>
-          <span class="membership-price">{plan.price}</span>
-          <ul class="membership-features">
-            {#each plan.features as feature}
-              <li>{feature}</li>
+    <div class="membership-categories">
+      {#each membershipCategories as category}
+        <div class="membership-category">
+          <h3 class="membership-category-title">{category.title}</h3>
+          <ul class="membership-entry-list">
+            {#each category.entries as entry}
+              <li class="membership-entry">
+                <span class="membership-entry-label">{entry.label}</span>
+                <span class="membership-entry-price">{entry.price}<span class="membership-entry-period">/Jahr</span></span>
+              </li>
             {/each}
           </ul>
         </div>
@@ -524,59 +536,70 @@
     border-bottom: none;
   }
 
-  /* Membership Cards */
-  .membership-cards {
+  /* Membership Categories */
+  .membership-categories {
     display: grid;
     gap: 1.5rem;
     margin-top: 2rem;
   }
 
   @media (min-width: 768px) {
-    .membership-cards {
+    .membership-categories {
       grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  .membership-card {
+  .membership-category {
     background: var(--color-white);
     padding: 2rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
-    border: 2px solid transparent;
   }
 
-  .membership-title {
+  .membership-category-title {
     font-size: 1.25rem;
-    color: var(--color-gray-800);
-    margin-bottom: 0.5rem;
-  }
-
-  .membership-price {
-    display: block;
-    font-size: 2rem;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--color-primary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-primary);
   }
 
-  .membership-features {
+  .membership-entry-list {
     list-style: none;
     padding: 0;
+    margin: 0;
   }
 
-  .membership-features li {
-    padding: 0.5rem 0;
-    color: var(--color-gray-600);
-    position: relative;
-    padding-left: 1.5rem;
+  .membership-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--color-gray-100);
+    gap: 1rem;
   }
 
-  .membership-features li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--color-primary);
+  .membership-entry:last-child {
+    border-bottom: none;
+  }
+
+  .membership-entry-label {
+    color: var(--color-gray-700);
+    font-size: 0.95rem;
+  }
+
+  .membership-entry-price {
     font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--color-gray-800);
+    white-space: nowrap;
+  }
+
+  .membership-entry-period {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-gray-500);
   }
 
   /* Contact Section */

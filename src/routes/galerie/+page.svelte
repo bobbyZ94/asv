@@ -13,15 +13,15 @@
   }
 
   // Sort newest-first by date
-  $: sortedImages = ([...((gallery.images || []) as GalleryImage[])])
-    .sort((a, b) => parseDate(b.date) - parseDate(a.date));
+  let sortedImages = $derived(([...((gallery.images || []) as GalleryImage[])])
+    .sort((a, b) => parseDate(b.date) - parseDate(a.date)));
 
   // Distribute into 3 columns for masonry layout
-  $: columns = (() => {
+  let columns = $derived((() => {
     const cols: GalleryImage[][] = [[], [], []];
     sortedImages.forEach((img, i) => cols[i % 3].push(img));
     return cols;
-  })();
+  })());
 </script>
 
 <svelte:head>

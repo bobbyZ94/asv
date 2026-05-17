@@ -1,0 +1,7 @@
+{
+  "entries": [
+    { "label": "Bis 10 Jahren", "price": "20€" },
+    { "label": "Bis 15 Jahren", "price": "25€" },
+    { "label": "Bis 18 Jahren sowie Schüler, Azubis und Studenten", "price": "35€" }
+  ]
+}
