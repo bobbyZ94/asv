@@ -2,6 +2,7 @@
   import { page } from '$app/stores';
   import { base } from '$app/paths';
   import { onMount } from 'svelte';
+  import membership from '../content/sections/membership.json';
 
   let isMenuOpen = false;
   let isScrolled = false;
@@ -67,6 +68,10 @@
           <a href="{base}/impressum" class="footer-link">Impressum</a>
           <span class="footer-separator">|</span>
           <a href="{base}/datenschutz" class="footer-link">Datenschutz</a>
+          {#if membership.satzung_file}
+            <span class="footer-separator">|</span>
+            <a href="{base}{membership.satzung_file}" target="_blank" rel="noopener noreferrer" class="footer-link">Satzung</a>
+          {/if}
         </div>
         <img src="{base}/logo.png" alt="ASV Rotauge e.V." class="footer-logo" />
         <p>&copy; {currentYear} ASV Rotauge e.V. <br>Alle Rechte vorbehalten.</p>

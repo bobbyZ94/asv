@@ -190,9 +190,14 @@
     {#if membership.disclaimer}
       <div class="membership-disclaimer">
         <p>{membership.disclaimer}</p>
-        {#if membership.disclaimer_file}
-          <a href="{base}{membership.disclaimer_file}" target="_blank" rel="noopener noreferrer" class="membership-cta-btn">Gebührenordnung</a>
-        {/if}
+        <div class="membership-disclaimer-btns">
+          {#if membership.disclaimer_file}
+            <a href="{base}{membership.disclaimer_file}" target="_blank" rel="noopener noreferrer" class="membership-cta-btn">Gebührenordnung</a>
+          {/if}
+          {#if membership.satzung_file}
+            <a href="{base}{membership.satzung_file}" target="_blank" rel="noopener noreferrer" class="membership-cta-btn">Satzung</a>
+          {/if}
+        </div>
       </div>
     {/if}
     {#if membership.membership_form_file}
@@ -662,10 +667,17 @@
 
   .membership-disclaimer {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
     margin-top: 1.5rem;
     color: var(--color-gray-600);
+  }
+
+  .membership-disclaimer-btns {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
   }
 
   .membership-cta {
