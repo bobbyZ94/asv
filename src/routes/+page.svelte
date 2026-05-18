@@ -195,12 +195,10 @@
         {/if}
       </div>
     {/if}
-    {#if membership.membership_form_file && membership.membership_cta_text}
-      {@const ctaParts = membership.membership_cta_text.split('Beitrittsformular')}
+    {#if membership.membership_form_file}
       <div class="membership-cta">
-        <p class="membership-cta-text">
-          {ctaParts[0]}<a href="{base}{membership.membership_form_file}" target="_blank" rel="noopener noreferrer" class="membership-cta-btn">Beitrittsformular</a>{ctaParts[1] ?? ''}
-        </p>
+        <p class="membership-cta-text">Haben Sie Lust aufs Angeln bekommen? Dann laden Sie unser Beitrittsformular runter und senden es uns ausgefüllt an <a href="mailto:asvrotauge@web.de" class="membership-cta-email">asvrotauge@web.de</a></p>
+        <a href="{base}{membership.membership_form_file}" target="_blank" rel="noopener noreferrer" class="membership-cta-btn">Beitrittsformular herunterladen</a>
       </div>
     {/if}
   </div>
@@ -696,6 +694,10 @@
     background: var(--color-gray-100);
     border-left: 4px solid var(--color-primary);
     border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
   }
 
   .membership-cta-text {
@@ -703,6 +705,16 @@
     font-size: 1rem;
     line-height: 1.7;
     margin: 0;
+  }
+
+  .membership-cta-email {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  .membership-cta-email:hover {
+    color: var(--color-primary-dark);
   }
 
   .membership-cta-btn {
