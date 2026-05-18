@@ -191,14 +191,14 @@
       <div class="membership-disclaimer">
         <p>{membership.disclaimer}</p>
         {#if membership.disclaimer_file}
-          <a href="{base}{membership.disclaimer_file}" target="_blank" rel="noopener noreferrer" class="membership-disclaimer-btn">Gebührenordnung</a>
+          <a href="{base}{membership.disclaimer_file}" target="_blank" rel="noopener noreferrer" class="membership-cta-btn">Gebührenordnung</a>
         {/if}
       </div>
     {/if}
     {#if membership.membership_form_file}
       <div class="membership-cta">
         <p class="membership-cta-text">Haben Sie Lust aufs Angeln bekommen? Dann laden Sie unser Beitrittsformular runter und senden es uns ausgefüllt an <a href="mailto:asvrotauge@web.de" class="membership-cta-email">asvrotauge@web.de</a></p>
-        <a href="{base}{membership.membership_form_file}" target="_blank" rel="noopener noreferrer" class="membership-cta-btn">Beitrittsformular herunterladen</a>
+        <a href="{base}{membership.membership_form_file}" target="_blank" rel="noopener noreferrer" class="membership-cta-btn">Beitrittsformular</a>
       </div>
     {/if}
   </div>
@@ -666,26 +666,6 @@
     gap: 1rem;
     margin-top: 1.5rem;
     color: var(--color-gray-600);
-  }
-
-  .membership-disclaimer-btn {
-    white-space: nowrap;
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 1.1rem;
-    background: var(--color-primary);
-    color: var(--color-white);
-    border-radius: var(--radius);
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-
-  .membership-disclaimer-btn:hover {
-    background: var(--color-primary-dark);
   }
 
   .membership-cta {
