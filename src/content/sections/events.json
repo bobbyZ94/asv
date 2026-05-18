@@ -25,6 +25,14 @@
       "location": "Vereinsheim",
       "time": "Ab 16:00 Uhr",
       "description": "Unser jährliches Vereinsfest mit Grill, Getränken und gemütlichem Beisammensein. Alle Mitglieder und ihre Familien sind herzlich eingeladen."
+    },
+    {
+      "date": "Mo.12.yyyy",
+      "type": "Fest",
+      "title": "Weihnachtsfest",
+      "location": "Weihnachtsmarkt Büttelborn",
+      "time": "15:00 - 18:00 Uhr",
+      "description": "Verkauf von geräucherten Forellen am Stand"
     }
   ]
 }
