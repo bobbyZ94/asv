@@ -195,9 +195,12 @@
         {/if}
       </div>
     {/if}
-    {#if membership.membership_form_file}
+    {#if membership.membership_form_file && membership.membership_cta_text}
+      {@const ctaParts = membership.membership_cta_text.split('Beitrittsformular')}
       <div class="membership-cta">
-        <p class="membership-cta-text">Haben Sie Lust aufs Angeln bekommen? Dann laden Sie unser <a href="{base}{membership.membership_form_file}" target="_blank" rel="noopener noreferrer" class="membership-cta-btn">Beitrittsformular</a> runter und senden es uns ausgefüllt an <a href="mailto:asvrotauge@web.de" class="membership-cta-link">asvrotauge@web.de</a></p>
+        <p class="membership-cta-text">
+          {ctaParts[0]}<a href="{base}{membership.membership_form_file}" target="_blank" rel="noopener noreferrer" class="membership-cta-btn">Beitrittsformular</a>{ctaParts[1] ?? ''}
+        </p>
       </div>
     {/if}
   </div>
@@ -700,16 +703,6 @@
     font-size: 1rem;
     line-height: 1.7;
     margin: 0;
-  }
-
-  .membership-cta-link {
-    color: var(--color-primary);
-    font-weight: 600;
-    text-decoration: underline;
-  }
-
-  .membership-cta-link:hover {
-    color: var(--color-primary-dark);
   }
 
   .membership-cta-btn {
