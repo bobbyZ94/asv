@@ -7,8 +7,8 @@ const HTML = `<!DOCTYPE html>
   <title>Admin - ASV Rotauge</title>
 </head>
 <body>
+  <script>window.CMS_MANUAL_INIT = true;</script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <script src="https://unpkg.com/decap-cms-locales@^3.0.0/dist/decap-cms-locales.js"></script>
   <script>
     const markdown = (label, name, required) => ({
       label,
