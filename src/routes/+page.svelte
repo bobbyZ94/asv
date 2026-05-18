@@ -191,7 +191,7 @@
       <div class="membership-disclaimer">
         <p>{membership.disclaimer}</p>
         {#if membership.disclaimer_file}
-          <a href={membership.disclaimer_file} target="_blank" rel="noopener noreferrer" class="membership-disclaimer-btn">Gebührenordnung</a>
+          <a href="{base}{membership.disclaimer_file}" target="_blank" rel="noopener noreferrer" class="membership-disclaimer-btn">Gebührenordnung</a>
         {/if}
       </div>
     {/if}

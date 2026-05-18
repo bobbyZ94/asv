@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import { marked } from 'marked';
   import gallery from '../../content/sections/gallery.json';
 
@@ -46,7 +47,7 @@
             <div class="masonry-column">
               {#each column as img}
                 <div class="gallery-item">
-                  <img src={img.image} alt={img.caption || ''} loading="lazy" />
+                  <img src="{base}{img.image}" alt={img.caption || ''} loading="lazy" />
                   {#if img.caption}
                     <div class="gallery-overlay">
                       <span class="gallery-caption">{img.caption}</span>
