@@ -1,5 +1,6 @@
 <script>
   import { page } from '$app/stores';
+  import { base } from '$app/paths';
   import { onMount } from 'svelte';
 
   let isMenuOpen = false;
@@ -7,12 +8,12 @@
   let currentYear = new Date().getFullYear();
 
   const navItems = [
-    { href: '/#about', label: 'Über uns' },
-    { href: '/#events', label: 'Termine' },
-    { href: '/#schonzeiten', label: 'Schonzeiten' },
-    { href: '/#mitgliedschaft', label: 'Mitgliedschaft' },
-    { href: '/#kontakt', label: 'Kontakt' },
-    { href: '/galerie', label: 'Galerie' }
+    { href: `${base}/#about`, label: 'Über uns' },
+    { href: `${base}/#events`, label: 'Termine' },
+    { href: `${base}/#schonzeiten`, label: 'Schonzeiten' },
+    { href: `${base}/#mitgliedschaft`, label: 'Mitgliedschaft' },
+    { href: `${base}/#kontakt`, label: 'Kontakt' },
+    { href: `${base}/galerie`, label: 'Galerie' }
   ];
 
   onMount(() => {
@@ -31,7 +32,7 @@
 <div class="site">
   <header class="header" class:scrolled={isScrolled}>
     <div class="header-container">
-      <a href="/" class="logo">
+      <a href="{base}/" class="logo">
         <span class="logo-text">ASV Rotauge e.V</span>
       </a>
 
@@ -63,11 +64,11 @@
     <div class="footer-container">
       <div class="footer-bottom">
         <div class="footer-links">
-          <a href="/impressum" class="footer-link">Impressum</a>
+          <a href="{base}/impressum" class="footer-link">Impressum</a>
           <span class="footer-separator">|</span>
-          <a href="/datenschutz" class="footer-link">Datenschutz</a>
+          <a href="{base}/datenschutz" class="footer-link">Datenschutz</a>
         </div>
-        <img src="/logo.png" alt="ASV Rotauge e.V." class="footer-logo" />
+        <img src="{base}/logo.png" alt="ASV Rotauge e.V." class="footer-logo" />
         <p>&copy; {currentYear} ASV Rotauge e.V. <br>Alle Rechte vorbehalten.</p>
       </div>
     </div>

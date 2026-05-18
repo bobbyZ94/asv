@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import { marked } from 'marked';
   import start from '../content/sections/start.json';
   import about from '../content/sections/about.json';
@@ -51,15 +52,15 @@
 <!-- Hero Section -->
 <section id="hero" class="hero">
   <div class="hero-container">
-    <img src="/logo.png" alt="ASV Rotauge e.V." class="hero-logo" />
+    <img src="{base}/logo.png" alt="ASV Rotauge e.V." class="hero-logo" />
     <h1 class="hero-title">{start.title}</h1>
     <p class="hero-subtitle">{start.subtitle}</p>
     <div class="hero-buttons">
       {#if start.button1_label}
-        <a href="/#about" class="btn btn-white">{start.button1_label}</a>
+        <a href="{base}/#about" class="btn btn-white">{start.button1_label}</a>
       {/if}
       {#if start.button2_label}
-        <a href="/#events" class="btn btn-secondary-white">{start.button2_label}</a>
+        <a href="{base}/#events" class="btn btn-secondary-white">{start.button2_label}</a>
       {/if}
     </div>
   </div>
