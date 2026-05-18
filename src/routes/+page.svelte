@@ -23,7 +23,13 @@
   const MONTHS_DE = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
 
   function parseDate(s: string): Date {
-    const [d, m, y] = s.split('.').map(Number);
+    if (!s) return new Date(0);
+    const datePart = s.includes('T') ? s.split('T')[0] : s;
+    if (datePart.includes('-')) {
+      const [y, m, d] = datePart.split('-').map(Number);
+      return new Date(y, m - 1, d);
+    }
+    const [d, m, y] = datePart.split('.').map(Number);
     return new Date(y, m - 1, d);
   }
 
@@ -172,7 +178,7 @@
       <div class="membership-disclaimer">
         <p>{membership.disclaimer}</p>
         {#if membership.disclaimer_file}
-          <a href={membership.disclaimer_file} download class="membership-disclaimer-btn">⬇ Download</a>
+          <a href={membership.disclaimer_file} target="_blank" rel="noopener noreferrer" class="membership-disclaimer-btn">Gebührenordnung</a>
         {/if}
       </div>
     {/if}

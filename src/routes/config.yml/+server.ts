@@ -69,7 +69,7 @@ collections:
             collapsed: true
             summary: '{{fields.date}} - {{fields.title}}'
             fields:
-              - { label: Datum, name: date, widget: datetime, date_format: dd.MM.yyyy, time_format: false, format: dd.MM.yyyy, picker_utc: false }
+              - { label: Datum, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, format: YYYY-MM-DD, picker_utc: false }
               - { label: Typ, name: type, widget: select, options: [Arbeitsdienst, Jugend, Versammlung, Fest, Sonstiges] }
               - { label: Titel, name: title, widget: string }
               - { label: Ort, name: location, widget: string }
@@ -116,7 +116,7 @@ collections:
           - { label: Titel, name: title, widget: string }
           - { label: Einführungstext, name: intro, widget: markdown, required: true, editor_components: [] }
           - { label: Disclaimer-Text, name: disclaimer, widget: string, required: false }
-          - { label: Gebührenordnung PDF, name: disclaimer_file, widget: file, required: false, media_folder: static/uploads, public_folder: /uploads }
+          - { label: Gebührenordnung PDF, name: disclaimer_file, widget: file, required: false }
       - name: membership_erwachsene
         label: Beiträge - Erwachsene
         file: src/content/sections/membership_erwachsene.json
@@ -173,6 +173,32 @@ collections:
           - { label: Adresse, name: address, widget: markdown, required: true, editor_components: [] }
           - { label: E-Mail, name: email, widget: string }
           - { label: Telefon, name: phone, widget: string }
+
+  - name: impressum
+    label: Impressum
+    editor:
+      preview: false
+    files:
+      - name: impressum
+        label: Impressum
+        file: src/content/sections/impressum.json
+        editor:
+          preview: false
+        fields:
+          - { label: Inhalt, name: body, widget: markdown, editor_components: [] }
+
+  - name: datenschutz
+    label: Datenschutz
+    editor:
+      preview: false
+    files:
+      - name: datenschutz
+        label: Datenschutz
+        file: src/content/sections/datenschutz.json
+        editor:
+          preview: false
+        fields:
+          - { label: Inhalt, name: body, widget: markdown, editor_components: [] }
 
   - name: gallery
     label: Galerie
