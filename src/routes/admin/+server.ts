@@ -151,7 +151,7 @@ const HTML = `<!DOCTYPE html>
             editor: noPreview,
             files: [
               {
-                name: 'membership',
+                name: 'membership_allgemein',
                 label: 'Allgemein',
                 file: 'src/content/sections/membership.json',
                 editor: noPreview,
