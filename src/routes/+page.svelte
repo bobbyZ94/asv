@@ -195,6 +195,11 @@
         {/if}
       </div>
     {/if}
+    {#if membership.membership_form_file}
+      <div class="membership-cta">
+        <p class="membership-cta-text">Sie sind überzeugt? Dann füllen Sie folgendes <a href="{base}{membership.membership_form_file}" target="_blank" rel="noopener noreferrer" class="membership-cta-link">Formular</a> aus und senden es an unsere E-Mail <a href="mailto:asvrotauge@web.de" class="membership-cta-link">asvrotauge@web.de</a></p>
+      </div>
+    {/if}
   </div>
 </section>
 
@@ -680,6 +685,31 @@
 
   .membership-disclaimer-btn:hover {
     background: var(--color-primary-dark);
+  }
+
+  .membership-cta {
+    margin-top: 2rem;
+    padding: 1.5rem 2rem;
+    background: var(--color-gray-100);
+    border-left: 4px solid var(--color-primary);
+    border-radius: var(--radius);
+  }
+
+  .membership-cta-text {
+    color: var(--color-gray-700);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .membership-cta-link {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  .membership-cta-link:hover {
+    color: var(--color-primary-dark);
   }
 
   /* Contact Section */

@@ -164,6 +164,9 @@ const HTML = `<!DOCTYPE html>
                 { label: 'Bereichsbezeichnung', name: 'section_label', widget: 'string' },
                 { label: 'Titel', name: 'title', widget: 'string' },
                 markdown('Einführungstext', 'intro'),
+                { label: 'Hinweistext', name: 'disclaimer', widget: 'string', required: false },
+                { label: 'Gebührenordnung (PDF)', name: 'disclaimer_file', widget: 'file', required: false },
+                { label: 'Aufnahmeformular (PDF)', name: 'membership_form_file', widget: 'file', required: false },
                 {
                   label: 'Kategorien',
                   label_singular: 'Kategorie',
