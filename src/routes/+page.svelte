@@ -203,7 +203,7 @@
     {#if membership.membership_form_file}
       <div class="membership-cta">
         <p class="membership-cta-text">Haben Sie Lust aufs Angeln bekommen? Dann laden Sie unser Beitrittsformular runter und senden es uns ausgefüllt an <a href="mailto:asvrotauge@web.de" class="membership-cta-email">asvrotauge@web.de</a></p>
-        <a href="{base}{membership.membership_form_file}" target="_blank" rel="noopener noreferrer" class="membership-cta-btn">Beitrittsformular</a>
+        <a href="{base}{membership.membership_form_file}" target="_blank" rel="noopener noreferrer" class="membership-form-btn">Beitrittsformular</a>
       </div>
     {/if}
   </div>
@@ -694,7 +694,7 @@
 
   .membership-cta-text {
     color: var(--color-gray-700);
-    font-size: 1rem;
+    font-size: 1.125rem;
     line-height: 1.7;
     margin: 0;
   }
@@ -723,6 +723,23 @@
   }
 
   .membership-cta-btn:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .membership-form-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 1rem;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 1.125rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .membership-form-btn:hover {
     background: var(--color-primary-dark);
   }
 
