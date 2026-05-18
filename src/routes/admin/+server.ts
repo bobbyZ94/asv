@@ -32,9 +32,6 @@ const HTML = `<!DOCTYPE html>
         },
         media_folder: 'static/uploads',
         public_folder: '/uploads',
-        media_library: {
-          max_file_size: 10485760
-        },
         collections: [
           {
             name: 'start',
@@ -169,7 +166,7 @@ const HTML = `<!DOCTYPE html>
                 ]
               },
               {
-                name: 'membership_erwachsene',
+                name: 'beitraege_erwachsene',
                 label: 'Beiträge - Erwachsene',
                 file: 'src/content/sections/membership_erwachsene.json',
                 editor: noPreview,
@@ -183,7 +180,7 @@ const HTML = `<!DOCTYPE html>
                 }]
               },
               {
-                name: 'membership_kinder',
+                name: 'beitraege_kinder',
                 label: 'Beiträge - Kinder',
                 file: 'src/content/sections/membership_kinder.json',
                 editor: noPreview,
@@ -197,7 +194,7 @@ const HTML = `<!DOCTYPE html>
                 }]
               },
               {
-                name: 'membership_familie',
+                name: 'beitraege_familie',
                 label: 'Beiträge - Familie',
                 file: 'src/content/sections/membership_familie.json',
                 editor: noPreview,
