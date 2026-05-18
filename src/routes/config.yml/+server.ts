@@ -15,7 +15,7 @@ collections:
     editor:
       preview: false
     files:
-      - name: start
+      - name: file_start
         label: Start
         file: src/content/sections/start.json
         description: Text unter dem Logo auf dem Hero-Banner.
@@ -30,7 +30,7 @@ collections:
     editor:
       preview: false
     files:
-      - name: about
+      - name: file_about
         label: Über Uns
         file: src/content/sections/about.json
         editor:
@@ -54,7 +54,7 @@ collections:
     editor:
       preview: false
     files:
-      - name: events
+      - name: file_events
         label: Termine
         file: src/content/sections/events.json
         editor:
@@ -81,7 +81,7 @@ collections:
     editor:
       preview: false
     files:
-      - name: schonzeiten
+      - name: file_schonzeiten
         label: Schonzeiten
         file: src/content/sections/schonzeiten.json
         editor:
@@ -165,7 +165,7 @@ collections:
     editor:
       preview: false
     files:
-      - name: contact
+      - name: file_contact
         label: Kontakt
         file: src/content/sections/contact.json
         editor:
@@ -182,7 +182,7 @@ collections:
     editor:
       preview: false
     files:
-      - name: impressum
+      - name: file_impressum
         label: Impressum
         file: src/content/sections/impressum.json
         editor:
@@ -195,7 +195,7 @@ collections:
     editor:
       preview: false
     files:
-      - name: datenschutz
+      - name: file_datenschutz
         label: Datenschutz
         file: src/content/sections/datenschutz.json
         editor:
@@ -208,7 +208,7 @@ collections:
     editor:
       preview: false
     files:
-      - name: gallery
+      - name: file_gallery
         label: Galerie
         file: src/content/sections/gallery.json
         editor:
