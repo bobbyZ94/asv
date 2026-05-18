@@ -106,7 +106,7 @@ collections:
     editor:
       preview: false
     files:
-      - name: membership
+      - name: membership_allgemein
         label: Allgemein
         file: src/content/sections/membership.json
         editor:
