@@ -45,7 +45,7 @@
 </script>
 
 <svelte:head>
-  <title>{start.title} - ASV Rotauge e.V.</title>
+  <title>ASV Rotauge e.V.</title>
   <meta name="description" content={start.subtitle} />
 </svelte:head>
 
