@@ -1,5 +1,3 @@
-export const prerender = true;
-
 const HTML = `<!DOCTYPE html>
 <html lang="de">
 <head>

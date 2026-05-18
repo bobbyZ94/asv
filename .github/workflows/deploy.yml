@@ -37,9 +37,8 @@ jobs:
 
       - name: Fix admin route for GitHub Pages
         run: |
-          rm -f build/admin
           mkdir -p build/admin
-          cp static/admin/index.html build/admin/index.html
+          cp admin.html build/admin/index.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
