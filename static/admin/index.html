@@ -1,13 +1,10 @@
-export const prerender = true;
-
-const HTML = `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Admin - ASV Rotauge</title>
-  <meta name="cms-config-url" content="/asv/config.yml" />
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
@@ -155,42 +152,65 @@ const HTML = `<!DOCTYPE html>
             name: 'membership',
             label: 'Mitgliedschaft',
             editor: noPreview,
-            files: [{
-              name: 'membership',
-              label: 'Mitgliedschaft',
-              file: 'src/content/sections/membership.json',
-              editor: noPreview,
-              fields: [
-                { label: 'Bereichsbezeichnung', name: 'section_label', widget: 'string' },
-                { label: 'Titel', name: 'title', widget: 'string' },
-                markdown('Einführungstext', 'intro'),
-                { label: 'Hinweistext', name: 'disclaimer', widget: 'string', required: false },
-                { label: 'Gebührenordnung (PDF)', name: 'disclaimer_file', widget: 'file', required: false },
-                { label: 'Aufnahmeformular (PDF)', name: 'membership_form_file', widget: 'file', required: false },
-                {
-                  label: 'Kategorien',
-                  label_singular: 'Kategorie',
-                  name: 'categories',
-                  widget: 'list',
-                  collapsed: true,
-                  summary: '{{fields.title}}',
+            files: [
+              {
+                name: 'membership',
+                label: 'Allgemein',
+                file: 'src/content/sections/membership.json',
+                editor: noPreview,
+                fields: [
+                  { label: 'Bereichsbezeichnung', name: 'section_label', widget: 'string' },
+                  { label: 'Titel', name: 'title', widget: 'string' },
+                  markdown('Einführungstext', 'intro'),
+                  { label: 'Hinweistext', name: 'disclaimer', widget: 'string', required: false },
+                  { label: 'Gebührenordnung (PDF)', name: 'disclaimer_file', widget: 'file', required: false },
+                  { label: 'Aufnahmeformular (PDF)', name: 'membership_form_file', widget: 'file', required: false },
+                  { label: 'Satzung (PDF)', name: 'satzung_file', widget: 'file', required: false },
+                ]
+              },
+              {
+                name: 'membership_erwachsene',
+                label: 'Beiträge - Erwachsene',
+                file: 'src/content/sections/membership_erwachsene.json',
+                editor: noPreview,
+                fields: [{
+                  label: 'Einträge', name: 'entries', widget: 'list',
+                  summary: '{{fields.label}} - {{fields.price}}',
                   fields: [
-                    { label: 'Kategorie', name: 'title', widget: 'string' },
-                    {
-                      label: 'Beiträge',
-                      label_singular: 'Beitrag',
-                      name: 'entries',
-                      widget: 'list',
-                      summary: '{{fields.label}} - {{fields.price}}',
-                      fields: [
-                        { label: 'Bezeichnung', name: 'label', widget: 'string' },
-                        { label: 'Preis', name: 'price', widget: 'string' }
-                      ]
-                    }
+                    { label: 'Bezeichnung', name: 'label', widget: 'string' },
+                    { label: 'Preis', name: 'price', widget: 'string' }
                   ]
-                }
-              ]
-            }]
+                }]
+              },
+              {
+                name: 'membership_kinder',
+                label: 'Beiträge - Kinder',
+                file: 'src/content/sections/membership_kinder.json',
+                editor: noPreview,
+                fields: [{
+                  label: 'Einträge', name: 'entries', widget: 'list',
+                  summary: '{{fields.label}} - {{fields.price}}',
+                  fields: [
+                    { label: 'Bezeichnung', name: 'label', widget: 'string' },
+                    { label: 'Preis', name: 'price', widget: 'string' }
+                  ]
+                }]
+              },
+              {
+                name: 'membership_familie',
+                label: 'Beiträge - Familie',
+                file: 'src/content/sections/membership_familie.json',
+                editor: noPreview,
+                fields: [{
+                  label: 'Einträge', name: 'entries', widget: 'list',
+                  summary: '{{fields.label}} - {{fields.price}}',
+                  fields: [
+                    { label: 'Bezeichnung', name: 'label', widget: 'string' },
+                    { label: 'Preis', name: 'price', widget: 'string' }
+                  ]
+                }]
+              }
+            ]
           },
           {
             name: 'contact',
@@ -207,6 +227,34 @@ const HTML = `<!DOCTYPE html>
                 markdown('Adresse', 'address'),
                 { label: 'E-Mail', name: 'email', widget: 'string' },
                 { label: 'Telefon', name: 'phone', widget: 'string' }
+              ]
+            }]
+          },
+          {
+            name: 'impressum',
+            label: 'Impressum',
+            editor: noPreview,
+            files: [{
+              name: 'impressum',
+              label: 'Impressum',
+              file: 'src/content/sections/impressum.json',
+              editor: noPreview,
+              fields: [
+                { label: 'Inhalt', name: 'body', widget: 'markdown', editor_components: [] }
+              ]
+            }]
+          },
+          {
+            name: 'datenschutz',
+            label: 'Datenschutz',
+            editor: noPreview,
+            files: [{
+              name: 'datenschutz',
+              label: 'Datenschutz',
+              file: 'src/content/sections/datenschutz.json',
+              editor: noPreview,
+              fields: [
+                { label: 'Inhalt', name: 'body', widget: 'markdown', editor_components: [] }
               ]
             }]
           },
@@ -251,12 +299,4 @@ const HTML = `<!DOCTYPE html>
     });
   </script>
 </body>
-</html>`;
-
-export function GET() {
-  return new Response(HTML, {
-    headers: {
-      'Content-Type': 'text/html; charset=utf-8'
-    }
-  });
-}
+</html>
