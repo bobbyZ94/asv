@@ -33,6 +33,14 @@
       "location": "Weihnachtsmarkt Büttelborn",
       "time": "15:00 - 18:00 Uhr",
       "description": "Verkauf von geräucherten Forellen am Stand"
+    },
+    {
+      "date": "2026-12-31",
+      "type": "Fest",
+      "title": "Neujahrangeln",
+      "location": "See",
+      "time": "0:00 Uhr",
+      "description": "Test"
     }
   ]
 }
