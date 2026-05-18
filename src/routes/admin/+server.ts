@@ -8,7 +8,7 @@ const HTML = `<!DOCTYPE html>
   <link rel="cms-config-url" type="application/json" href="/config.yml" />
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
 </body>
 </html>`;
 
