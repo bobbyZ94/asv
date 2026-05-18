@@ -35,6 +35,12 @@ jobs:
         env:
           BASE_PATH: /asv
 
+      - name: Fix admin route for GitHub Pages
+        run: |
+          rm -f build/admin
+          mkdir -p build/admin
+          cp static/admin/index.html build/admin/index.html
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
