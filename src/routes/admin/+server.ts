@@ -7,12 +7,9 @@ const HTML = `<!DOCTYPE html>
   <title>Admin - ASV Rotauge</title>
 </head>
 <body>
-  <script>window.CMS_MANUAL_INIT = true;</script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script src="https://unpkg.com/decap-cms-locales@^3.0.0/dist/decap-cms-locales.js"></script>
   <script>
-    window.addEventListener('load', function() {
-    CMS.registerLocale('de', window.DecapCmsLocales.de);
     const markdown = (label, name, required) => ({
       label,
       name,
@@ -22,6 +19,7 @@ const HTML = `<!DOCTYPE html>
     });
     const noPreview = { preview: false };
 
+    if (window.DecapCmsLocales) CMS.registerLocale('de', window.DecapCmsLocales.de);
     CMS.init({
       config: {
         locale: 'de',
@@ -299,7 +297,6 @@ const HTML = `<!DOCTYPE html>
         ]
       }
     });
-    }); // end window.addEventListener
   </script>
 </body>
 </html>`;
