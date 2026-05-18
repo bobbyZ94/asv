@@ -36,6 +36,11 @@
   let sortedEvents = $derived([...events.events].sort(
     (a, b) => parseDate(a.date).getTime() - parseDate(b.date).getTime()
   ));
+
+  const PAGE_SIZE = 4;
+  let visibleCount = $state(PAGE_SIZE);
+  let visibleEvents = $derived(sortedEvents.slice(0, visibleCount));
+  let hasMore = $derived(visibleCount < sortedEvents.length);
 </script>
 
 <svelte:head>
@@ -99,7 +104,7 @@
     <span class="section-label">{events.section_label}</span>
     <h2 class="section-title">{events.title}</h2>
     <div class="events-list">
-      {#each sortedEvents as event}
+      {#each visibleEvents as event}
         {@const date = parseDate(event.date)}
         <article class="event-card">
           <div class="event-date">
@@ -121,6 +126,13 @@
         </article>
       {/each}
     </div>
+    {#if hasMore}
+      <div class="events-more">
+        <button class="events-more-btn" onclick={() => visibleCount += PAGE_SIZE}>
+          Weitere Termine anzeigen ({sortedEvents.length - visibleCount})
+        </button>
+      </div>
+    {/if}
   </div>
 </section>
 
@@ -517,6 +529,31 @@
   .event-description {
     color: var(--color-gray-600);
     line-height: 1.6;
+  }
+
+  .events-more {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .events-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .events-more-btn:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
   }
 
   /* Schonzeiten Table */

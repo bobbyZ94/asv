@@ -7,7 +7,7 @@ const HTML = `<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Admin - ASV Rotauge</title>
-  <meta name="cms-config-url" content="/admin/config.yml" />
+  <meta name="cms-config-url" content="/asv/config.yml" />
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
