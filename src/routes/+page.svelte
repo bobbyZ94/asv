@@ -1,5 +1,6 @@
 <script lang="ts">
   import { base } from '$app/paths';
+  import { onMount } from 'svelte';
   import { marked } from 'marked';
   import start from '../content/sections/start.json';
   import about from '../content/sections/about.json';
@@ -34,9 +35,12 @@
     return new Date(y, m - 1, d);
   }
 
-  let sortedEvents = $derived([...events.events].sort(
-    (a, b) => parseDate(a.date).getTime() - parseDate(b.date).getTime()
-  ));
+  let today = $state(new Date(0));
+  onMount(() => { today = new Date(); today.setHours(0, 0, 0, 0); });
+  let sortedEvents = $derived([...events.events]
+    .filter(e => parseDate(e.date) >= today)
+    .sort((a, b) => parseDate(a.date).getTime() - parseDate(b.date).getTime())
+  );
 
   const PAGE_SIZE = 4;
   let visibleCount = $state(PAGE_SIZE);
