@@ -49,6 +49,14 @@
       "location": "Gewässerabschnitt A",
       "time": "9:00 Uhr",
       "description": "Gemeinsam machen wir unsere Angelplätze fit für die neue Saison. Treffpunkt am Parkplatz. Bitte bringen Sie Handschuhe und entsprechende Kleidung mit."
+    },
+    {
+      "date": "2026-10-09",
+      "type": "Arbeitsdienst",
+      "title": "Saubermachen",
+      "location": "Braunshardt",
+      "time": "Ganztägig",
+      "description": "Saubermachen am See"
     }
   ]
 }
