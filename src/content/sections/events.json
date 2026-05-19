@@ -41,6 +41,14 @@
       "location": "See",
       "time": "0:00 Uhr",
       "description": "Test"
+    },
+    {
+      "date": "2026-05-12",
+      "type": "Jugend",
+      "title": "Test",
+      "location": "Test",
+      "time": ".",
+      "description": "Test"
     }
   ]
 }
