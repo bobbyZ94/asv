@@ -34,6 +34,7 @@
     font-size: clamp(2rem, 5vw, 3rem);
     color: var(--color-gray-800);
     margin-bottom: 2rem;
+    text-align: center;
   }
 
   .content :global(h2) {
@@ -42,12 +43,14 @@
     color: var(--color-gray-800);
     margin-top: 3rem;
     margin-bottom: 0.75rem;
+    text-align: center;
   }
 
   .content :global(p) {
     color: var(--color-gray-600);
     line-height: 1.9;
     margin-bottom: 0.75rem;
+    text-align: center;
   }
 
   .content :global(a) {

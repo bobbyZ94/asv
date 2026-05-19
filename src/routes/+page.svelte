@@ -55,6 +55,7 @@
 
 <!-- Hero Section -->
 <section id="hero" class="hero">
+  <img src="{base}/hintergrund.jpg" alt="" class="hero-bg" aria-hidden="true" />
   <div class="hero-container">
     <img src="{base}/logo.png" alt="ASV Rotauge e.V." class="hero-logo" />
     <h1 class="hero-title">{start.title}</h1>
@@ -255,10 +256,25 @@
     text-align: center;
     padding: 6rem 1rem 4rem;
     color: var(--color-white);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.18;
+    filter: grayscale(100%);
+    pointer-events: none;
   }
 
   .hero-container {
     max-width: 1000px;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-logo {
