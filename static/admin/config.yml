@@ -2,8 +2,8 @@ backend:
   name: github
   repo: bobbyZ94/asv
   branch: main
-  base_url: https://sveltia-cms-auth.r-zioltkowski.workers.dev
-  auth_endpoint: auth
+  base_url: REPLACE_WITH_DECAPBRIDGE_BASE_URL
+  auth_type: implicit
 locale: de
 media_folder: static/uploads
 public_folder: /uploads
